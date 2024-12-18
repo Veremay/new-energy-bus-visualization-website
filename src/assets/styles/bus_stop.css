@@ -1,0 +1,68 @@
+.busstop {
+  text-align: center;
+  width: 400px;
+  padding: 4rem 0rem;
+  height: 25rem;
+}
+
+.start-button {
+  margin-bottom: 20px;
+  background-color: rgba#006fff;
+  z-index: -1;
+}
+
+.start {
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+}
+
+.energy-list {
+  padding: 0rem;
+}
+
+.energy-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 8px 16px 4px 16px;
+  background-color: #fff;
+  /* border: 10px solid #000; */
+  border-left: 10px solid #000;
+  border-right: 10px solid #000;
+  border-bottom: 10px solid #000;
+  border-top: 0;
+  cursor: pointer;
+  font-size: 26px;
+  font-weight: bold;
+}
+
+.top-border .energy-button {
+  border-top: 10px solid #000; /* Top border for first button */
+}
+
+.energy-button:hover {
+  background-color: var(--hover-bg, #fff); /* 动态背景色 */
+}
+
+.energy-button:active {
+  background-color: var(--hover-bg, #fff); /* 动态背景色 */
+}
+
+.energy-button.selected {
+  background-color: var(--hover-bg, #fff); /* 动态背景色 */
+}
+
+.electric-pole {
+  position: relative;
+  top: -126%;
+  left: 50%;
+  transform: translateX(-50%);
+  /* transform: translateY(-82%); */
+  width: 40px;
+  height: 600px;
+  background-color: #fff;
+  border: 10px solid #000;
+  z-index: 1; /* Ensure pole is behind the buttons */
+}

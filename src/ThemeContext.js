@@ -8,7 +8,7 @@ export const ThemeProvider = ({ children }) => {
     fontColor: "#000",
   });
 
-  const [category, setCategory] = useState("tram"); // 默认分类
+  const [category, setCategory] = useState("babybus"); // 默认分类
 
   useEffect(() => {
     // 根据当前分类设置主题
@@ -47,6 +47,8 @@ export const ThemeProvider = ({ children }) => {
         setTheme({ bgColor: "#f0f0f0", fontColor: "#000" });
     }
   }, [category]);
+
+  console.log(category);
 
   return (
     <ThemeContext.Provider value={{ theme, category, setCategory }}>
