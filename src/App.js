@@ -3,6 +3,9 @@ import Header from "./components/Header";
 import Body from "./components/Body";
 import { ThemeProvider } from "./ThemeContext";
 import { ThemeContext } from "./ThemeContext";
+import { motion } from "motion/react";
+// import ScrollCar from "./car_motion";
+import { ReactSVG } from "react-svg";
 
 // function App() {
 //   const [theme, setTheme] = useState({
@@ -71,6 +74,14 @@ const MainApp = () => {
     >
       <Header />
       <Body />
+      {/* <motion.div
+        animate={
+          {
+            x:100 // 向右移动100px
+          }
+        }>
+        <Svg1 />
+      </motion.div> */}
     </div>
   );
 };

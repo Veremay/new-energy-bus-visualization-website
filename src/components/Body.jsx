@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../assets/styles/body.css";
 import { ThemeContext } from "../ThemeContext";
+import ScrollCar from "./car_motion";
 
 const Body = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -8,7 +9,7 @@ const Body = () => {
   let content;
   if (category === "tram") content = <p>有轨电车的相关信息</p>;
   else if (category === "trolleybus") content = <p>无轨电车的相关信息</p>;
-  else if (category === "charcoal") content = <p>木炭车的相关信息</p>;
+  else if (category === "charcoal") content = <ScrollCar />;
   else if (category === "diesel") content = <p>柴油车的相关信息</p>;
   else if (category === "gasoline") content = <p>汽油车的相关信息</p>;
   else if (category === "coalgas") content = <p>煤气车的相关信息</p>;
