@@ -5,6 +5,11 @@ html {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none; /* IE隐藏滚动条 */
+  scrollbar-width: none; /* FireFox */
+}
+::-webkit-scrollbar {
+  display: none; /* Chrome Safari */
 }
 
 body {

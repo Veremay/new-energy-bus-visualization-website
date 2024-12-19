@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import "../assets/styles/body.css";
 import { ThemeContext } from "../ThemeContext";
 import ScrollCar from "./car_motion";
+import { ReactComponent as Road } from '../assets/svg/Road.svg';
 
 const Body = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -18,7 +19,13 @@ const Body = () => {
   else if (category === "biodiesel") content = <p>生物柴油车的相关信息</p>;
   else if (category === "hydrogen") content = <p>氢能源车的相关信息</p>;
 
-  return <div className="body">{content}</div>;
+  return <div className="body">
+    <div 
+      style={{position: "fixed", bottom: "20px"}}>
+      <Road />
+    </div>
+    {content}
+  </div>;
 };
 
 export default Body;
