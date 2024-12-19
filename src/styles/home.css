@@ -1,6 +1,9 @@
 body {
   padding: 1.5rem 2.5rem 0rem 2.5rem;
   background-color: #006fff;
+
+  overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 .grid-container {

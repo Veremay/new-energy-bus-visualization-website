@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { useLocation } from "react-router-dom";
 import "../styles/home.css";
 import { ThemeContext } from "../ThemeContext";
 import BusStop from "./bus_stop";
@@ -12,6 +13,13 @@ import { ReactComponent as Hydrogen } from "../assets/svg/hydrogen.svg";
 
 const Home = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
+
+  const location = useLocation(); // 获取当前路由
+  const isContentPage = location.pathname === "/content"; // 判断是否在 /content 页面
+  if (!isContentPage) {
+    document.body.style.backgroundColor = "#006fff";
+    document.body.style.padding = "1.5rem 2.5rem 0rem 2.5rem";
+  }
 
   // const energySources = [
   //   {

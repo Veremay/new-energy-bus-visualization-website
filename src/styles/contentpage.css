@@ -8,9 +8,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  height: 7vh;
+  padding: 1.5rem 2.5rem 0rem 2.5rem;
 }
 
-.nav-back {
+.arrow-button {
   display: flex;
   flex-direction: row;
   font-size: 1.25rem;
@@ -24,6 +26,10 @@
   p {
     margin: 0;
   }
+
+  svg {
+    fill: var(--fill, #fff);
+  }
 }
 
 .quotation-button {
@@ -33,25 +39,89 @@
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
+  cursor: pointer;
+}
+
+.main-body {
+  height: 53vh;
+  overflow-y: hidden;
 }
 
 /* 内容区样式 */
-.content {
+/* .content-container {
   display: flex;
-  flex-direction: row; /* 左右布局 */
+  flex-direction: row; 左右布局 
   justify-content: space-between;
   align-items: center;
-  height: 100%;
+  padding: 0rem 2.5rem 0rem 2.5rem;
+} */
+
+.scrollable-container {
+  height: 100vh;
+  overflow-y: auto;
+  /* 确保滚动是平滑的 */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
 }
 
 /* 左侧文字区域 */
-.content-text {
+.text-part {
   flex: 1;
-  padding: 20px;
-  max-width: 50%; /* 左侧内容占据50% */
+  max-width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.content-text {
+  width: 80%;
+}
+
+.styleA {
+  h1 {
+    margin: 0.5rem 0 0 0;
+    text-transform: uppercase;
+    font-size: 8rem;
+    font-weight: bold;
+    font-family: "Inter", sans-serif;
+    display: inline-block;
+  }
+  .translation {
+    display: inline-block;
+    writing-mode: vertical-rl;
+    font-size: 3rem;
+
+    margin: 0;
+  }
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+}
+
+.styleB {
+  line-height: 1.5;
+  h1 {
+    margin: 1rem 0 0 0;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: bold;
+
+    display: inline-block;
+  }
+  .translation {
+    display: inline-block;
+    writing-mode: vertical-rl;
+    font-size: 3rem;
+
+    margin: 0;
+  }
+  h2 {
+    margin: 0;
+    font-size: 2rem;
+    font-weight: bold;
+  }
 }
 
 .content-title {
@@ -66,13 +136,34 @@
   margin-bottom: 20px;
 }
 
+/* new */
+.content-section {
+  min-height: 100vh;
+
+  position: relative;
+}
+
+.content-container {
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 2rem;
+  padding: 0rem 2.5rem 0rem 2.5rem;
+}
+
+/* 可以为不同section添加一些间距 */
+.content-section + .content-section {
+  margin-top: 2rem;
+}
+
 /* 右侧图片区域 */
-.content-image-container {
+.image-part {
   flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 50%; /* 右侧内容占据50% */
+  max-width: 40%; /* 右侧内容占据50% */
 }
 
 .content-image {
@@ -82,26 +173,17 @@
   object-fit: cover;
 }
 
-/* 分页指示器 */
-.pagination {
+.bus-part {
   position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  bottom: 0;
+  transform: translateY(-30%);
+}
+
+.bus-stop {
+  position: relative;
+  left: 0;
+  scale: 0.65;
   display: flex;
-  gap: 8px;
-}
-
-.pagination .dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background-color: #f1e29e;
-  opacity: 0.5;
-  transition: opacity 0.3s, transform 0.3s;
-}
-
-.pagination .dot.active {
-  opacity: 1;
-  transform: scale(1.2);
+  align-items: flex-end;
+  justify-content: flex-end;
 }
