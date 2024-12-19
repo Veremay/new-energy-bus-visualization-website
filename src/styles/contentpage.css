@@ -1,10 +1,38 @@
-.content-container {
-  position: relative;
-  height: 100vh;
-  overflow: hidden;
-  text-align: center;
-  color: #fff;
-  padding: 20px;
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-back {
+  display: flex;
+  flex-direction: row;
+  font-size: 1.25rem;
+  gap: 0.7rem;
+  padding: 0;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  cursor: pointer;
+
+  p {
+    margin: 0;
+  }
+}
+
+.quotation-button {
+  padding: 0;
+  background-color: rgba(0, 0, 0, 0);
+  border: none;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
 }
 
 /* 内容区样式 */

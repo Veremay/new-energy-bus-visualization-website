@@ -50,8 +50,44 @@ const ContentPage = () => {
   };
 
   return (
-    <div className="grid-container">
-      <div className="header"></div>
+    <div className="flex-container">
+      <div className="header">
+        <div>
+          <button className="nav-back">
+            <svg
+              width="10"
+              height="19"
+              viewBox="0 0 10 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M0.585938 8.83594L8.08594 1.375C8.4375 0.984375 9.02344 0.984375 9.41406 1.375C9.76562 1.72656 9.76562 2.3125 9.41406 2.66406L2.53906 9.5L9.375 16.375C9.76562 16.7266 9.76562 17.3125 9.375 17.6641C9.02344 18.0547 8.4375 18.0547 8.08594 17.6641L0.585938 10.1641C0.195312 9.8125 0.195312 9.22656 0.585938 8.83594Z"
+                fill="black"
+              />
+            </svg>
+            <p>返回</p>
+          </button>
+        </div>
+        <div>
+          <button className="quotation-button">
+            <svg
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect width="40" height="40" rx="20" fill="black" />
+              <path
+                d="M20.645 11.792H22.053V27.5H20.249V13.992C19.259 15.004 18.027 15.708 16.553 16.148V14.344C17.257 14.146 18.005 13.838 18.753 13.398C19.501 12.914 20.117 12.386 20.645 11.792Z"
+                fill="white"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <BusStop />
       <h1 className="content-title">{title}</h1>
       <p className="content-description">{description}</p>
