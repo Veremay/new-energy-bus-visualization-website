@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../assets/styles/body.css";
+import "../styles/body.css";
 import { ThemeContext } from "../ThemeContext";
 import ScrollCar from "./car_motion";
 

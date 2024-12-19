@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import "../assets/styles/home.css";
+import "../styles/home.css";
 import { ThemeContext } from "../ThemeContext";
 import BusStop from "./bus_stop";
 import { ReactComponent as Bbus } from "../assets/svg/bbus.svg";

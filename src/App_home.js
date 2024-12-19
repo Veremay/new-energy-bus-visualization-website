@@ -1,5 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
+import ContentPage from "./components/ContentPage";
 import { ThemeProvider } from "./ThemeContext";
 import { ThemeContext } from "./ThemeContext";
 const App = () => {
@@ -14,16 +16,14 @@ const MainApp = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
 
   return (
-    <div
-    // style={{
-    //   backgroundColor: theme.bgColor,
-    //   color: theme.fontColor,
-    //   minHeight: "100vh",
-    //   transition: "all 0.5s ease",
-    // }}
-    >
-      <Home />
-    </div>
+    <Router>
+      <Routes>
+        {/* Home 页 */}
+        <Route path="/" element={<Home />} />
+        {/* Body 页 */}
+        <Route path="/content" element={<ContentPage />} />
+      </Routes>
+    </Router>
   );
 };
 
