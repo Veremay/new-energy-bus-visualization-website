@@ -57,6 +57,9 @@ const BusStop = () => {
         <button
           className="start"
           onClick={() => {
+            if (category === "babybus") {
+              setCategory("electric");
+            }
             if (isContentPage) {
               // 如果在 /content 页面，返回首页
               navigate("/");

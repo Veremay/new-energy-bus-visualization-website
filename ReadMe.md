@@ -16,6 +16,7 @@ website/
 │   └── bus.ico            # 站点图标
 ├── src/                   # 主代码目录
 │   ├── assets/            # 静态资源
+│   │   ├── data/          # 存储文本资源
 │   │   ├── icons/         # 图标资源
 │   │   ├── svg/           # 小车资源
 │   │   └── images/        # 图片资源

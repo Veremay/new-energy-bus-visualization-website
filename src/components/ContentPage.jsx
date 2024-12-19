@@ -50,7 +50,8 @@ const ContentPage = () => {
   };
 
   return (
-    <div className="content-container">
+    <div className="grid-container">
+      <div className="header"></div>
       <BusStop />
       <h1 className="content-title">{title}</h1>
       <p className="content-description">{description}</p>

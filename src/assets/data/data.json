@@ -1,0 +1,47 @@
+{
+  "electric": [
+    {
+      "page": 0,
+      "title": "ELECTRIC",
+      "translation": "电能",
+      "subtitle": "从“铛铛车”到“宝宝巴士”",
+      "content": [],
+      "image": [],
+      "source": []
+    },
+    {
+      "page": 1,
+      "title": "有轨电车留下初代公交先驱辙印",
+      "translation": "",
+      "subtitle": "",
+      "content": [
+        "你知道中国第一辆公交车是什么车吗？",
+        "有轨公交车是中国城市公共交通系统的重要组成部分，在中国的发展历史悠久，最早可以追溯到19世纪末。1899年，北京从德国西门子公司引进了有轨电车，修建了马家堡火车站至永定门的线网和轨道，这是北京现代公共交通的肇始。"
+      ],
+      "image": [
+        "../assets/images/electric_1_1.png",
+        "../assets/images/electric_1_2.png",
+        "../assets/images/electric_1_3.png"
+      ],
+      "source": []
+    },
+    {
+      "page": 2,
+      "title": "",
+      "translation": "",
+      "subtitle": "1906年2月16日",
+      "content": [
+        "中国第一条有轨电车线路在天津试运营。这条线路共计5.16公里，经东马路、西马路、南马路、北马路（即天津老城墙的西南角、西北角、东北角、东南角）围城环行。由于有轨电车的车头挂的是白牌，天津人称之为“白牌电车”。",
+        "“白牌电车”在天津一经问世，引起了很大的轰动。久而久之，就产生了两句民谣：",
+        "“西南角，广仁堂，电车公司叫卖行。”",
+        "“四马路，安电线，白牌电车围城转。”"
+      ],
+      "image": [
+        "../assets/images/electric_2_1.png",
+        "../assets/images/electric_2_2.png",
+        "../assets/images/electric_2_3.png"
+      ],
+      "source": []
+    }
+  ]
+}
