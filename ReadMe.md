@@ -2,7 +2,8 @@
 
 - node.js v20.10.0
 - npm 10.2.3
-- React.js ^19.0.0
+- React.js ^18.3.1
+- framer motion 11.15.0
 
 # 文件结构
 
