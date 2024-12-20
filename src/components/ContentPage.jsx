@@ -37,10 +37,26 @@ const ContentPage = () => {
   // }, [currentPage, category]);
 
   // Get current page data
-  const currentData = data[category][currentPage];
+  // const currentData = data[category][currentPage];
 
   const categoryData = data[category];
-  const styleClass = currentPage === 0 ? styles.styleA : styles.styleB;
+
+  useEffect(() => {
+    setCurrentPage(0);
+  }, [category]);
+
+  useEffect(() => {
+    // Reset current page and scroll position on category change
+    setCurrentPage(0);
+    const scrollableContainer = document.querySelector(".scrollable-container");
+    if (scrollableContainer) {
+      scrollableContainer.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: "auto", // Ensure no scrolling animation
+      });
+    }
+  }, [category]);
 
   return (
     <div className="flex-container" style={{ color: theme.fontColor }}>
@@ -115,6 +131,8 @@ const ContentPage = () => {
             )}
           </div>
         </div> */}
+
+        {/* v2.0 */}
         <div className="scrollable-container">
           {categoryData.map((pageData, pageIndex) => (
             <div
@@ -160,6 +178,7 @@ const ContentPage = () => {
             </div>
           ))}
         </div>
+
         <div className="bus-part">
           <div className="bus-stop">
             <BusStop />
