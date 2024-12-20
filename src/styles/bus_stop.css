@@ -62,12 +62,12 @@
 
 .electric-pole {
   position: relative;
-  top: -123%;
+  top: -139%;
   left: 50%;
   transform: translateX(-50%);
   /* transform: translateY(-82%); */
   width: 40px;
-  height: 600px;
+  height: 650px;
   background-color: #fff;
   border: 10px solid #000;
   z-index: 1; /* Ensure pole is behind the buttons */

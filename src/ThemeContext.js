@@ -37,6 +37,9 @@ export const ThemeProvider = ({ children }) => {
       case "electric":
         setTheme({ bgColor: "#9AFF6B", fontColor: "#000" });
         break;
+      case "battery":
+        setTheme({ bgColor: "#9AFF6B", fontColor: "#000" });
+        break;
       case "biodiesel":
         setTheme({ bgColor: "#D798FF", fontColor: "#000" });
         break;

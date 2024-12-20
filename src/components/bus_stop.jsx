@@ -8,6 +8,7 @@ import { ReactComponent as GasolineIcon } from "../assets/icons/gasoline.svg";
 import { ReactComponent as DieselIcon } from "../assets/icons/diesel.svg";
 import { ReactComponent as GasIcon } from "../assets/icons/gas.svg";
 import { ReactComponent as NaturalGasIcon } from "../assets/icons/naturalgas.svg";
+import { ReactComponent as BatteryIcon } from "../assets/icons/battery.svg";
 import { ReactComponent as HydrogenIcon } from "../assets/icons/hydrogen.svg";
 
 const BusStop = () => {
@@ -19,7 +20,7 @@ const BusStop = () => {
     {
       category: "electric",
       Icon: ElectricityIcon,
-      text: "电能",
+      text: "外源电",
       color: "#9AFF6B",
     }, // 电能
     {
@@ -42,6 +43,12 @@ const BusStop = () => {
       text: "天然气",
       color: "#FFC4E1",
     }, // 天然气
+    {
+      category: "battery",
+      Icon: BatteryIcon,
+      text: "电池电",
+      color: "#9AFF6B",
+    },
     {
       category: "hydrogen",
       Icon: HydrogenIcon,

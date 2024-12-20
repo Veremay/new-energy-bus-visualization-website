@@ -10,6 +10,7 @@ import { ReactComponent as Gasoline } from "../assets/svg/gasoline.svg";
 import { ReactComponent as Diesel } from "../assets/svg/diesel.svg";
 import { ReactComponent as Coalgas } from "../assets/svg/coalgas.svg";
 import { ReactComponent as Naturalgas } from "../assets/svg/naturalgas.svg";
+import { ReactComponent as Battery } from "../assets/svg/battery.svg";
 import { ReactComponent as Hydrogen } from "../assets/svg/hydrogen.svg";
 
 const Home = () => {
@@ -67,6 +68,8 @@ const Home = () => {
         return <Coalgas {...props} />;
       case "naturalgas":
         return <Naturalgas {...props} />;
+      case "battery":
+        return <Battery {...props} />;
       case "hydrogen":
         return <Hydrogen {...props} />;
       default:
