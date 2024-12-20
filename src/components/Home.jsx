@@ -18,7 +18,7 @@ const Home = () => {
   const isContentPage = location.pathname === "/content"; // 判断是否在 /content 页面
   if (!isContentPage) {
     document.body.style.backgroundColor = "#006fff";
-    document.body.style.padding = "1.5rem 2.5rem 0rem 2.5rem";
+    document.body.style.padding = "3vh 3vw 0 3vw";
   }
 
   // const energySources = [

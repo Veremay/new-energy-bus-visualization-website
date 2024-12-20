@@ -71,7 +71,7 @@
 /* 左侧文字区域 */
 .text-part {
   flex: 1;
-  max-width: 60%;
+  max-width: 90%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -79,6 +79,11 @@
 
 .content-text {
   width: 80%;
+}
+
+.data-title {
+  display: flex;
+  text-align: center;
 }
 
 .styleA {
@@ -128,11 +133,11 @@
   }
 }
 
-.content-title {
+/* .content-title {
   font-size: 36px;
   font-weight: bold;
   margin-bottom: 20px;
-}
+} */
 
 .content-description {
   font-size: 18px;
@@ -167,11 +172,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 40%; /* 右侧内容占据50% */
+  max-width: 40%;
 }
 
 .content-image {
-  max-width: 100%;
+  max-width: 95%;
   max-height: 80%; /* 保证图片不超过父容器 */
   border-radius: 10px;
   object-fit: cover;

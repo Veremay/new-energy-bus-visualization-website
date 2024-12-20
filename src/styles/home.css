@@ -1,17 +1,14 @@
 body {
-  padding: 1.5rem 2.5rem 0rem 2.5rem;
-  background-color: #006fff;
-
   overflow-x: hidden;
   overflow-y: hidden;
 }
 
 .grid-container {
   background-color: rgba(0, 0, 0, 0);
-  display: grid;
+  /* display: grid;
   grid-column-gap: 3rem;
   grid-template-columns: auto auto;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: auto auto auto auto; */
 }
 
 .title {
@@ -31,20 +28,30 @@ body {
   color: #fff;
   font-weight: 300;
   font-size: medium;
-  width: 85%;
+  width: 58%;
   padding: 0.5rem 0rem;
   line-height: 1.5;
 }
 
 .bus_stop {
-  grid-column: 2/2;
-  grid-row: 1 / 5;
+  /* grid-column: 2/2;
+  grid-row: 1 / 5; */
   /* width: 200px; */
+  position: absolute;
+  bottom: 1vh;
+  right: 5vw;
+  transform: translateY(-50%);
+  /* transform: translateX(-50%); */
+  scale: 2rem;
 }
 
 .bus_svg {
-  scale: 0.5;
-  width: 80%;
+  scale: 0.7;
+
   left: 0;
-  bottom: 0;
+
+  position: absolute;
+  bottom: 1vh;
+
+  /* transform: translateY(-50%); */
 }
