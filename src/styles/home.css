@@ -46,12 +46,19 @@ body {
 }
 
 .bus_svg {
-  scale: 0.7;
-
-  left: 0;
-
+  scale: 0.8;
+  display: inline-block;
+  width: auto !important;
+  height: auto !important;
+  padding: 0; /* 确保没有内边距 */
+  margin: 0; /* 确保没有外边距 */
+  left: 2vw;
   position: absolute;
-  bottom: 1vh;
-
+  bottom: 0;
+  max-height: 1000px;
   /* transform: translateY(-50%); */
+}
+.bus_svg svg {
+  width: 100%;
+  height: auto;
 }

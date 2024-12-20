@@ -3,7 +3,8 @@ import { useLocation } from "react-router-dom";
 import "../styles/home.css";
 import { ThemeContext } from "../ThemeContext";
 import BusStop from "./bus_stop";
-import { ReactComponent as Bbus } from "../assets/svg/bbus.svg";
+import { ReactComponent as Bbus } from "../assets/svg/bbbus.svg";
+import { ReactComponent as Electric } from "../assets/svg/electric.svg";
 import { ReactComponent as Charcoal } from "../assets/svg/charcoal.svg";
 import { ReactComponent as Gasoline } from "../assets/svg/gasoline.svg";
 import { ReactComponent as Diesel } from "../assets/svg/diesel.svg";
@@ -48,15 +49,14 @@ const Home = () => {
 
   const renderSvgComponent = () => {
     const props = {
-      width: "1000",
-      height: "400",
-      style: { display: "block" },
+      style: { display: "inline-block" },
     };
 
     switch (category) {
       case "babybus":
-      case "electric":
         return <Bbus {...props} />;
+      case "electric":
+        return <Electric {...props} />;
       case "charcoal":
         return <Charcoal {...props} />;
       case "diesel":

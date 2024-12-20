@@ -176,7 +176,7 @@
 }
 
 .content-image {
-  max-width: 95%;
+  max-width: 80%;
   max-height: 80%; /* 保证图片不超过父容器 */
   border-radius: 10px;
   object-fit: cover;
