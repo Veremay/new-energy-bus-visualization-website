@@ -40,6 +40,7 @@ const ContentPage = () => {
   // const currentData = data[category][currentPage];
 
   const categoryData = data[category];
+  console.log(categoryData)
 
   useEffect(() => {
     setCurrentPage(0);
