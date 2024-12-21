@@ -1,15 +1,19 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
 import "typeface-inter";
 import "../styles/contentpage.css";
 import data from "../assets/data/data.json";
 import BusStop from "./bus_stop";
+import { ReactComponent as Road } from '../assets/svg/Road.svg';
+// import ScrollCar from "./car_motion";
+import ScrollCar from "./car_motion";
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(0);
+  const scrollContainerRef = useRef(null); // 定义滚动容器引用
 
   // Set background color
   document.body.style.backgroundColor = theme.bgColor;
@@ -41,6 +45,7 @@ const ContentPage = () => {
 
   const categoryData = data[category];
   console.log(categoryData)
+  
 
   useEffect(() => {
     setCurrentPage(0);
@@ -58,6 +63,11 @@ const ContentPage = () => {
       });
     }
   }, [category]);
+
+  useEffect(() => {
+    console.log("scrollContainerRef.current:", scrollContainerRef.current);
+  }, []);
+
 
   return (
     <div className="flex-container" style={{ color: theme.fontColor }}>
@@ -134,7 +144,7 @@ const ContentPage = () => {
         </div> */}
 
         {/* v2.0 */}
-        <div className="scrollable-container">
+        <div className="scrollable-container" ref={scrollContainerRef}>
           {categoryData.map((pageData, pageIndex) => (
             <div
               key={pageIndex}
@@ -176,15 +186,20 @@ const ContentPage = () => {
                   )}
                 </div>
               </div>
+             
             </div>
           ))}
         </div>
-
-        <div className="bus-part">
+        <div className="Road"
+          style={{position: "fixed", bottom: "20px"}}>
+          <Road />
+        </div>
+        {/* <div className="bus-part">
           <div className="bus-stop">
             <BusStop />
           </div>
-        </div>
+        </div> */}
+        <ScrollCar scrollContainerRef={scrollContainerRef}/>
       </div>
     </div>
   );

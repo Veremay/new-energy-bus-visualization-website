@@ -47,7 +47,7 @@
 }
 
 .main-body {
-  height: 53vh;
+  height: 100vh;
   overflow-y: hidden;
 }
 
@@ -62,7 +62,7 @@
 
 .scrollable-container {
   height: 100vh;
-  overflow-y: auto;
+  overflow-y: scroll;
   /* 确保滚动是平滑的 */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
@@ -178,7 +178,7 @@
 }
 
 .bus-part {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   transform: translateY(-30%);
 }
