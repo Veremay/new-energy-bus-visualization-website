@@ -3,12 +3,14 @@ import { useLocation } from "react-router-dom";
 import "../styles/home.css";
 import { ThemeContext } from "../ThemeContext";
 import BusStop from "./bus_stop";
-import { ReactComponent as Bbus } from "../assets/svg/bbus.svg";
+import { ReactComponent as Bbus } from "../assets/svg/bbbus.svg";
+import { ReactComponent as Electric } from "../assets/svg/electric.svg";
 import { ReactComponent as Charcoal } from "../assets/svg/charcoal.svg";
 import { ReactComponent as Gasoline } from "../assets/svg/gasoline.svg";
 import { ReactComponent as Diesel } from "../assets/svg/diesel.svg";
 import { ReactComponent as Coalgas } from "../assets/svg/coalgas.svg";
 import { ReactComponent as Naturalgas } from "../assets/svg/naturalgas.svg";
+import { ReactComponent as Battery } from "../assets/svg/battery.svg";
 import { ReactComponent as Hydrogen } from "../assets/svg/hydrogen.svg";
 
 const Home = () => {
@@ -18,7 +20,7 @@ const Home = () => {
   const isContentPage = location.pathname === "/content"; // 判断是否在 /content 页面
   if (!isContentPage) {
     document.body.style.backgroundColor = "#006fff";
-    document.body.style.padding = "1.5rem 2.5rem 0rem 2.5rem";
+    document.body.style.padding = "3vh 3vw 0 3vw";
   }
 
   // const energySources = [
@@ -48,15 +50,14 @@ const Home = () => {
 
   const renderSvgComponent = () => {
     const props = {
-      width: "1000",
-      height: "400",
-      style: { display: "block" },
+      style: { display: "inline-block" },
     };
 
     switch (category) {
       case "babybus":
-      case "electric":
         return <Bbus {...props} />;
+      case "electric":
+        return <Electric {...props} />;
       case "charcoal":
         return <Charcoal {...props} />;
       case "diesel":
@@ -67,6 +68,8 @@ const Home = () => {
         return <Coalgas {...props} />;
       case "naturalgas":
         return <Naturalgas {...props} />;
+      case "battery":
+        return <Battery {...props} />;
       case "hydrogen":
         return <Hydrogen {...props} />;
       default:
