@@ -17,10 +17,14 @@ import { ReactComponent as Connected_line5 } from "../assets/svg/connected-line5
 import { ReactComponent as Tram5_backwheels } from "../assets/svg/tram5-backwheels.svg"
 import { ReactComponent as Tram5_frontwheels } from "../assets/svg/tram5-frontwheels.svg"
 import { ReactComponent as Tram2_1 } from "../assets/svg/tram2-1.svg"
+import { ReactComponent as Pollution} from "../assets/svg/electric-pollution.svg"
+import { ReactComponent as Pollution2} from "../assets/svg/electric-pollution2.svg"
+import { ReactComponent as People} from "../assets/svg/people-in-tram.svg"
 
 const ScrollCar = ({ scrollContainerRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
+  const [isHovered, setIsHovered] = useState(false);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef?.current;
@@ -48,12 +52,12 @@ const ScrollCar = ({ scrollContainerRef }) => {
 //   const carPosition = maxScroll / 5
 //   const carPosition = Math.min((scrollPosition / maxScroll) * maxCarPosition, maxCarPosition);
   const [currentCarIndex, setCurrentCarIndex] = useState(0); // 当前显示的小车索引
-  const tram1 = {'body': <Tram1 />, 'connected_line': <Connected_line />};
-  const tram2 = {'body': <Tram2 />, 'connected_line': <Connected_line />, 'back_wheels': <Tram2_wheels />};
-  const tram2_1 = {'body': <Tram2_1 />};
-  const tram3 = {'body': <Tram3 />, 'connected_line': <Connected_line3 />, 'back_wheels': <Tram3_backwheels />, 'front_wheels': <Tram3_frontwheels />};
-  const tram4 = {'body': <Tram4 />, 'connected_line': <Connected_line4 />, 'back_wheels': <Tram4_backwheels />, 'front_wheels': <Tram4_frontwheels />};
-  const tram5 = {'body': <Tram5 />, 'connected_line': <Connected_line5 />, 'back_wheels': <Tram5_backwheels />, 'front_wheels': <Tram5_frontwheels />};
+  const tram1 = {'body': <Tram1 />, 'connected_line': <Connected_line />, 'pollution': <Pollution />};
+  const tram2 = {'body': <Tram2 />, 'connected_line': <Connected_line />, 'back_wheels': <Tram2_wheels />, 'pollution': <Pollution />};
+  const tram2_1 = {'body': <Tram2_1 />, 'pollution': <Pollution />};
+  const tram3 = {'body': <Tram3 />, 'connected_line': <Connected_line3 />, 'back_wheels': <Tram3_backwheels />, 'front_wheels': <Tram3_frontwheels />, 'pollution': <Pollution2 />};
+  const tram4 = {'body': <Tram4 />, 'connected_line': <Connected_line4 />, 'back_wheels': <Tram4_backwheels />, 'front_wheels': <Tram4_frontwheels />, 'pollution': <Pollution2 />};
+  const tram5 = {'body': <Tram5 />, 'connected_line': <Connected_line5 />, 'back_wheels': <Tram5_backwheels />, 'front_wheels': <Tram5_frontwheels />, 'pollution': <Pollution2 />};
   const trams = [tram1, tram2, tram2_1, tram3, tram4, tram5];
 
   const speedFactor = 0.5;
@@ -116,13 +120,27 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [carPosition]);
 
+  const handleClick = () => {
+    alert("SVG clicked!");
+  };
+
+  const handleMouseEnter = () => {
+    console.log("hhhhhhhh")
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    console.log("4")
+    setIsHovered(false);
+    
+  };
 
   return (
     <motion.div
       style={{
         position: "absolute",
         bottom: "65px",
-        // left: "20px",
+        left: currentCarIndex === 0?"280px":0,
         x: carPosition, // 绑定计算结果到x
         display: "flex",
         flexDirection: "column",
@@ -151,7 +169,8 @@ const ScrollCar = ({ scrollContainerRef }) => {
             <motion.div
               style={{ 
                 zIndex: 3,
-                left: "-10%"
+                left: "-10%",
+                // marginTop: tramIndex === 0 ? "19%" : 0
                }}
               animate={{ y: [0, -4, 0] }}
               transition={{
@@ -161,6 +180,19 @@ const ScrollCar = ({ scrollContainerRef }) => {
               }}>
               {currentTram?.body}
             </motion.div>
+            {tramIndex === 0 ? 
+              <motion.div 
+                style = {{marginTop: "-28%", cursor: "pointer", zIndex:4}}
+                animate={{ y: [0, -4, 0] }}
+                transition={{
+                  duration: 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave} >
+              <People stroke={isHovered ? "white" : "black"} stroke-width={isHovered ? 2 : 0}/>
+            </motion.div>: null}
             {currentTram?.back_wheels && (
               <div style={{ 
                 marginTop: tramIndex === 3 ? "-8%" : tramIndex === 4 ? "-10%" : tramIndex === 5 ? "-9%" : "-6%",
@@ -176,6 +208,34 @@ const ScrollCar = ({ scrollContainerRef }) => {
                 zIndex: 4, }}>
                 {currentTram.front_wheels}
               </div>
+            )}
+            {currentTram?.pollution && (
+              <motion.div 
+                style={{
+                  marginTop: tramIndex === 0? "6%" : tramIndex === 1? "-10%" : tramIndex === 2? "-6%" : tramIndex === 3? "-19%" :"-17%",
+                  marginLeft: tramIndex === 0? "-120%" : tramIndex === 1? "-115%" : tramIndex === 2? "-110%" : tramIndex === 3? "-125%" : "-120%",
+                  cursor: "pointer",
+                  zIndex: "5"
+                }}
+                animate={{ opacity: [1, 0.3, 1]}}
+                transition={{
+                    duration: 1, // 动画持续时间
+                    repeat: Infinity, // 无限循环
+                    ease: "easeInOut", // 缓动效果
+                  }}
+                onClick={handleClick}
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave}
+              >
+                <motion.div 
+                  animate={{y: [0, -4, 0]}}
+                  transition={{
+                    duration: 0.3, // 动画持续时间
+                    repeat: Infinity, // 无限循环
+                    ease: "easeInOut", // 缓动效果
+                  }}>
+                  {tramIndex <= 2 ? <Pollution /> : <Pollution2 />}
+                </motion.div></motion.div>
             )}
             
           </React.Fragment>

@@ -12,6 +12,11 @@ import { ReactComponent as Rail } from '../assets/svg/rail.svg';
 import ScrollCar from "./car_motion";
 import Electric_car from "./electric_motion";
 import Roadorail from "./roadorail";
+import Charcoal from "./charcoal_motion"
+import Gasoline from "./gasoline_motion"
+import Diesel from "./diesel_motion"
+import Coalgas from "./coalgas_motion"
+import Naturalgas from "./naturalgas_motion"
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -54,6 +59,16 @@ const ContentPage = () => {
     switch (category) {
       case "electric":
         return <Electric_car scrollContainerRef={scrollContainerRef}/>;
+      case "charcoal":
+        return <Charcoal scrollContainerRef={scrollContainerRef}/>;
+      case "gasoline":
+        return <Gasoline scrollContainerRef={scrollContainerRef}/>;
+      case "diesel":
+        return <Diesel scrollContainerRef={scrollContainerRef}/>;
+      case "coalgas":
+        return <Coalgas scrollContainerRef={scrollContainerRef}/>;
+      case "naturalgas":
+        return <Naturalgas scrollContainerRef={scrollContainerRef}/>;
       default:
         return;
     }
@@ -95,23 +110,24 @@ const ContentPage = () => {
   return (
     <div className="flex-container" style={{ color: theme.fontColor }}>
       <div className="header">
-        <div className="nav-back">
-          <button
-            className="arrow-button"
-            style={{ color: theme.fontColor, "--fill": theme.fontColor }}
-          >
-            <svg
-              width="10"
-              height="19"
-              viewBox="0 0 10 19"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path d="M0.585938 8.83594L8.08594 1.375C8.4375 0.984375 9.02344 0.984375 9.41406 1.375C9.76562 1.72656 9.76562 2.3125 9.41406 2.66406L2.53906 9.5L9.375 16.375C9.76562 16.7266 9.76562 17.3125 9.375 17.6641C9.02344 18.0547 8.4375 18.0547 8.08594 17.6641L0.585938 10.1641C0.195312 9.8125 0.195312 9.22656 0.585938 8.83594Z" />
-            </svg>
+      <div className="nav-back">
+          {/* <button
+            className="arrow-button"
+            style={{ color: theme.fontColor, "--fill": theme.fontColor }}
+          >
+            <svg
+              width="10"
+              height="19"
+              viewBox="0 0 10 19"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M0.585938 8.83594L8.08594 1.375C8.4375 0.984375 9.02344 0.984375 9.41406 1.375C9.76562 1.72656 9.76562 2.3125 9.41406 2.66406L2.53906 9.5L9.375 16.375C9.76562 16.7266 9.76562 17.3125 9.375 17.6641C9.02344 18.0547 8.4375 18.0547 8.08594 17.6641L0.585938 10.1641C0.195312 9.8125 0.195312 9.22656 0.585938 8.83594Z" />
+            </svg>
 
-            <p>返回</p>
-          </button>
+            <p>返回</p >
+          </button> */}
+          <p style={{ fontWeight: "bold" }}>从“铛铛车”到“宝宝巴士”</p >
         </div>
         <div>
           <button
@@ -220,14 +236,14 @@ const ContentPage = () => {
         </div>
         {getBaseComponent(category)}
         {getWrapperComponent(category)}
-        <motion.div className="bus-part"
+        <div className="bus-part"
           animate={{
-            
+
           }}>
           <div className="bus-stop">
             <BusStop />
           </div>
-        </motion.div>
+        </div>
         {/* <div
           style={{
             transform: "scale(0.5)", // 缩小到 50%
