@@ -184,14 +184,17 @@
 
 .bus-part {
   position: fixed;
+  z-index: -1;
   bottom: 0;
-  transform: translateY(-30%);
+  left: 1000px;
+  transform: translateY(-43.5%);
 }
 
 .bus-stop {
   position: relative;
+  z-index: -1;
   left: 0;
-  scale: 0.65;
+  scale: 0.415;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;

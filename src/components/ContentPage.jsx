@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
 import "typeface-inter";
@@ -6,8 +7,11 @@ import "../styles/contentpage.css";
 import data from "../assets/data/data.json";
 import BusStop from "./bus_stop";
 import { ReactComponent as Road } from '../assets/svg/Road.svg';
-// import ScrollCar from "./car_motion";
+import { ReactComponent as Wire } from '../assets/svg/wire.svg';
+import { ReactComponent as Rail } from '../assets/svg/rail.svg';
 import ScrollCar from "./car_motion";
+import Electric_car from "./electric_motion";
+import Roadorail from "./roadorail";
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -46,6 +50,25 @@ const ContentPage = () => {
   const categoryData = data[category];
   console.log(categoryData)
   
+  const getWrapperComponent = (category) => {
+    switch (category) {
+      case "electric":
+        return <Electric_car scrollContainerRef={scrollContainerRef}/>;
+      default:
+        return;
+    }
+  };
+
+  const getBaseComponent = (category) => {
+    if (category === "electric") {
+      return <Roadorail scrollContainerRef={scrollContainerRef}/>;
+    } else{
+      return <div className="Road"
+        style={{position: "fixed", bottom: "20px"}}>
+        <Road />
+      </div>;
+    }
+  };
 
   useEffect(() => {
     setCurrentPage(0);
@@ -195,16 +218,25 @@ const ContentPage = () => {
             </div>
           ))}
         </div>
-        <div className="Road"
-          style={{position: "fixed", bottom: "20px"}}>
-          <Road />
-        </div>
-        {/* <div className="bus-part">
+        {getBaseComponent(category)}
+        {getWrapperComponent(category)}
+        <motion.div className="bus-part"
+          animate={{
+            
+          }}>
           <div className="bus-stop">
             <BusStop />
           </div>
+        </motion.div>
+        {/* <div
+          style={{
+            transform: "scale(0.5)", // 缩小到 50%
+            transformOrigin: "center", // 缩放的中心点
+            zIndex: 5
+          }}>
+          <BusStop />
         </div> */}
-        <ScrollCar scrollContainerRef={scrollContainerRef}/>
+
       </div>
     </div>
   );
