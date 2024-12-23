@@ -148,6 +148,7 @@
 /* new */
 .content-section {
   min-height: 100vh;
+  /* z-index: -1; */
 
   position: relative;
 }
@@ -159,11 +160,13 @@
   align-items: flex-start;
   gap: 2rem;
   padding: 0rem 2.5rem 0rem 2.5rem;
+  /* z-index: -1; */
 }
 
 /* 可以为不同section添加一些间距 */
 .content-section + .content-section {
   margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 /* 右侧图片区域 */
@@ -184,17 +187,17 @@
 
 .bus-part {
   position: fixed;
-  z-index: -1;
-  bottom: 0;
-  left: 1000px;
-  transform: translateY(-43.5%);
+  z-index: 3;
+  bottom: 0%;
+  left: -3%;
+  transform: translateY(-25%);
 }
 
 .bus-stop {
   position: relative;
-  z-index: -1;
+  z-index: 3;
   left: 0;
-  scale: 0.415;
+  scale: 0.6;
   display: flex;
   align-items: flex-end;
   justify-content: flex-end;
