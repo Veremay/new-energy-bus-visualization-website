@@ -4,22 +4,24 @@ import { ReactComponent as Tram1 } from "../assets/svg/tram1.svg";
 import { ReactComponent as Connected_line } from "../assets/svg/connected-line1.svg";
 import { ReactComponent as Tram2 } from "../assets/svg/tram2.svg";
 import { ReactComponent as Tram2_wheels } from "../assets/svg/tram2-wheels.svg";
-import { ReactComponent as Tram3 } from "../assets/svg/tram3.svg";
-import { ReactComponent as Connected_line3 } from "../assets/svg/connected-line3.svg";
-import { ReactComponent as Tram3_backwheels } from "../assets/svg/tram3-backwheels.svg";
-import { ReactComponent as Tram3_frontwheels } from "../assets/svg/tram3-frontwheels.svg";
-import { ReactComponent as Tram4 } from "../assets/svg/tram4.svg";
-import { ReactComponent as Connected_line4 } from "../assets/svg/connected-line4.svg";
-import { ReactComponent as Tram4_backwheels } from "../assets/svg/tram4-backwheels.svg";
-import { ReactComponent as Tram4_frontwheels } from "../assets/svg/tram4-frontwheels.svg";
-import { ReactComponent as Tram5 } from "../assets/svg/tram5.svg";
-import { ReactComponent as Connected_line5 } from "../assets/svg/connected-line5.svg";
-import { ReactComponent as Tram5_backwheels } from "../assets/svg/tram5-backwheels.svg";
-import { ReactComponent as Tram5_frontwheels } from "../assets/svg/tram5-frontwheels.svg";
-import { ReactComponent as Tram2_1 } from "../assets/svg/tram2-1.svg";
-import { ReactComponent as Pollution } from "../assets/svg/electric-pollution.svg";
-import { ReactComponent as Pollution2 } from "../assets/svg/electric-pollution2.svg";
-import { ReactComponent as People } from "../assets/svg/people-in-tram.svg";
+import { ReactComponent as Tram3 } from "../assets/svg/tram3.svg"
+import { ReactComponent as Connected_line3 } from "../assets/svg/connected-line3.svg"
+import { ReactComponent as Tram3_backwheels } from "../assets/svg/tram3-backwheels.svg"
+import { ReactComponent as Tram3_frontwheels } from "../assets/svg/tram3-frontwheels.svg"
+import { ReactComponent as Tram4 } from "../assets/svg/tram4.svg"
+import { ReactComponent as Connected_line4 } from "../assets/svg/connected-line4.svg"
+import { ReactComponent as Tram4_backwheels } from "../assets/svg/tram4-backwheels.svg"
+import { ReactComponent as Tram4_frontwheels } from "../assets/svg/tram4-frontwheels.svg"
+import { ReactComponent as Tram5 } from "../assets/svg/tram5.svg"
+import { ReactComponent as Connected_line5 } from "../assets/svg/connected-line5.svg"
+import { ReactComponent as Tram5_backwheels } from "../assets/svg/tram5-backwheels.svg"
+import { ReactComponent as Tram5_frontwheels } from "../assets/svg/tram5-frontwheels.svg"
+import { ReactComponent as Tram2_1 } from "../assets/svg/tram2-1.svg"
+import { ReactComponent as Pollution} from "../assets/svg/electric-pollution.svg"
+import { ReactComponent as Pollution2} from "../assets/svg/electric-pollution2.svg"
+import { ReactComponent as People} from "../assets/svg/people-in-tram.svg"
+import { ReactComponent as Tooltip} from "../assets/svg/tram1-tooltip.svg"
+
 
 const ScrollCar = ({
   scrollContainerRef,
@@ -186,6 +188,12 @@ const ScrollCar = ({
     console.log("hhhhhhhh");
     setIsHovered(true);
   };
+
+  const [isVisible, setIsVisible] = useState(false); // 控制组件显示/隐藏
+
+  // 切换显示状态
+  const toggleVisibility = () => {
+    setIsVisible((prev) => !prev);}
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
@@ -246,15 +254,13 @@ const ScrollCar = ({
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                <People
-                  stroke={isHovered ? "white" : "black"}
-                  stroke-width={isHovered ? 2 : 0}
-                />
-              </motion.div>
-            ) : null}
+                onClick={toggleVisibility}
+                onMouseEnter={handleMouseEnter} 
+                onMouseLeave={handleMouseLeave} >
+              <People stroke={isHovered ? "white" : "black"} stroke-width={isHovered ? 3 : 0}/>
+              </motion.div>):null
+            }
+            
             {currentTram?.back_wheels && (
               <div
                 style={{
@@ -355,7 +361,24 @@ const ScrollCar = ({
               </motion.div>
             )}
           </React.Fragment>
-        ) : null
+          
+        ):null)
+      }
+      {isVisible && currentCarIndex === 0 &&(
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          style={{
+            position: "absolute",
+            top: "20px",
+            left: "600px",
+            zIndex: 7
+          }}
+        >
+          <Tooltip />
+        </motion.div>
+
       )}
     </motion.div>
   );

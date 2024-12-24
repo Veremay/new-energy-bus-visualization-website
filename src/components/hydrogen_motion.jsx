@@ -52,7 +52,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       setCurrentCarIndex(0); // 设置初始小车
     }
   }, [maxScroll]);
-
+ 
 //   const handleClick = () => {
 //     alert("SVG clicked!");
 //   };
