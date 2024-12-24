@@ -39,12 +39,27 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
   }, [scrollContainerRef]);
 
   const maxCarPosition = 5700; // 设置小车的最大移动范围
-//   const carPosition = maxScroll / 5
-//   const carPosition = Math.min((scrollPosition / maxScroll) * maxCarPosition, maxCarPosition);
+  //   const carPosition = maxScroll / 5
+  //   const carPosition = Math.min((scrollPosition / maxScroll) * maxCarPosition, maxCarPosition);
   const [currentCarIndex, setCurrentCarIndex] = useState(0); // 当前显示的小车索引
-  const car1 = {'body': <Battery1 />, 'back_wheels': <Backwheels1 />, 'front_wheels': <Frontwheels1 />, 'pollution': <Pollution />};
-  const car2 = {'body': <Battery2 />, 'back_wheels': <Backwheels2 />, 'front_wheels': <Frontwheels2 />, 'pollution': <Pollution />};
-  const car3 = {'body': <Battery3 />, 'back_wheels': <Backwheels3 />, 'front_wheels': <Frontwheels3 />, 'pollution': <Pollution />};
+  const car1 = {
+    body: <Battery1 />,
+    back_wheels: <Backwheels1 />,
+    front_wheels: <Frontwheels1 />,
+    pollution: <Pollution />,
+  };
+  const car2 = {
+    body: <Battery2 />,
+    back_wheels: <Backwheels2 />,
+    front_wheels: <Frontwheels2 />,
+    pollution: <Pollution />,
+  };
+  const car3 = {
+    body: <Battery3 />,
+    back_wheels: <Backwheels3 />,
+    front_wheels: <Frontwheels3 />,
+    pollution: <Pollution />,
+  };
   const cars = [car1, car2, car3];
 
   const speedFactor = 0.3;
@@ -53,20 +68,32 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     if (maxScroll === 0) {
       return 0; // 初始加载时，小车位置为起始点
     }
-    if (scrollPosition < (maxScroll * 2 / 6)) {
-      return ((scrollPosition / (maxScroll * 2 / 6)) * maxCarPosition) * speedFactor;
-    } else if(scrollPosition < (maxScroll * 11 / 12)){
-        // const segmentStart = maxScroll * 2 / 6;
-        // const segmentEnd = maxScroll * 9 / 12;
-        // const progress = (scrollPosition - segmentStart) / (segmentEnd - segmentStart);
-        // return progress * (maxCarPosition *9 / 12) * speedFactor + (maxCarPosition *9 / 12) * speedFactor;    
-      return Math.min((((scrollPosition - (maxScroll * 2 / 6)) / (maxScroll * 6 / 12)) * maxCarPosition - 700) * speedFactor,600);
+    if (scrollPosition < (maxScroll * 2) / 6) {
+      return (
+        (scrollPosition / ((maxScroll * 2) / 6)) * maxCarPosition * speedFactor
+      );
+    } else if (scrollPosition < (maxScroll * 11) / 12) {
+      // const segmentStart = maxScroll * 2 / 6;
+      // const segmentEnd = maxScroll * 9 / 12;
+      // const progress = (scrollPosition - segmentStart) / (segmentEnd - segmentStart);
+      // return progress * (maxCarPosition *9 / 12) * speedFactor + (maxCarPosition *9 / 12) * speedFactor;
+      return Math.min(
+        (((scrollPosition - (maxScroll * 2) / 6) / ((maxScroll * 6) / 12)) *
+          maxCarPosition -
+          700) *
+          speedFactor,
+        600
+      );
     }
     // return ((scrollPosition - (maxScroll * 9 / 12)) / (maxScroll * 3 / 12)) * (maxCarPosition *9 / 12) * speedFactor + maxCarPosition * speedFactor;
     // return ((scrollPosition - (maxScroll * 9 / 12)) / (maxScroll * 3 / 12)) * (maxCarPosition / 3) * speedFactor + maxCarPosition * speedFactor;
-    return ((scrollPosition - (maxScroll * 11 / 12)) / (maxScroll * 1 / 12) * maxCarPosition - 1000)* speedFactor; // 最后一个位置
+    return (
+      (((scrollPosition - (maxScroll * 11) / 12) / ((maxScroll * 1) / 12)) *
+        maxCarPosition -
+        1000) *
+      speedFactor
+    ); // 最后一个位置
   })();
-  
 
   useEffect(() => {
     if (maxScroll === 0) {
@@ -76,20 +103,20 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
 
   // 切换小车逻辑
   useEffect(() => {
-    if (scrollPosition < (maxScroll * 2 /6)) {
-      setCurrentCarIndex(0); 
-    } else if (scrollPosition < (maxScroll * 11 / 12)) {
-      setCurrentCarIndex(1); 
-    } else{
-      setCurrentCarIndex(2); 
+    if (scrollPosition < (maxScroll * 2) / 6) {
+      setCurrentCarIndex(0);
+    } else if (scrollPosition < (maxScroll * 11) / 12) {
+      setCurrentCarIndex(1);
+    } else {
+      setCurrentCarIndex(2);
     }
   }, [scrollPosition, maxScroll]);
 
-//   const handleAnimationComplete = () => {
-//     if (currentCarIndex < trams.length - 1) {
-//       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
-//     }
-//   };
+  //   const handleAnimationComplete = () => {
+  //     if (currentCarIndex < trams.length - 1) {
+  //       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
+  //     }
+  //   };
   useEffect(() => {
     if (carPosition >= maxCarPosition) {
       if (currentCarIndex < cars.length - 1) {
@@ -101,6 +128,9 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
   const handleClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // 更新父组件状态
     setIsModalVisible(true); // 显示模态框
+  const handleClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // 更新父组件状态
+    setIsModalVisible(true); // 显示模态框
   };
 
   const controls = useAnimation(); // 用于控制 Framer Motion 动画
@@ -108,7 +138,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
 
   useEffect(() => {
     // 检测 carPosition 是否达到触发刹车动画的位置
-    if (carPosition >= 600&&currentCarIndex===1) {
+    if (carPosition >= 600 && currentCarIndex === 1) {
       // 模拟刹车效果
       controls.start({
         scaleX: [1, 0.95, 1], // 横向缩放模拟刹车
@@ -155,7 +185,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       style={{
         position: "absolute",
         bottom: "90px",
-        left: currentCarIndex === 0?"290px":0,
+        left: currentCarIndex === 0 ? "290px" : 0,
         x: carPosition, // 绑定计算结果到x
         display: "flex",
         flexDirection: "column",
@@ -241,9 +271,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
         ):null)
       }
       </motion.div>
-      
     </motion.div>
-    
   );
 };
 

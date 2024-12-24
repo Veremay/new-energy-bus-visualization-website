@@ -20,6 +20,7 @@ import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
 import Policy from "./policy";
+import Quotes from "./quotes";
 import Longroad from "./hill"
 
 const ContentPage = () => {
@@ -60,7 +61,6 @@ const ContentPage = () => {
   // const currentData = data[category][currentPage];
 
   const categoryData = data[category];
-  console.log(categoryData);
 
   const getWrapperComponent = (category) => {
     switch (category) {
@@ -253,14 +253,17 @@ const ContentPage = () => {
 
             <p>返回</p>
           </button> */}
-          <p style={{ fontWeight: "bold" }}>从“铛铛车”到“宝宝巴士”</p>
+          <p style={{ fontWeight: "bold" }}>中国公交“源”来如此</p>
         </div>
 
         <div>
           <button
             className="quotation-button"
             style={{ color: theme.fontColor, "--fill": theme.fontColor }}
-            onClick={() => handleButtonClick("popout1")}
+            onClick={() =>
+              // handleStatClick(`statistic_${idx + 1}.png`)
+              handleButtonClick("popout4")
+            }
           >
             <svg
               t="1734679850423"
@@ -326,6 +329,7 @@ const ContentPage = () => {
                 {selectedPopoutId === "popout1" && <Popout id="1" />}
                 {selectedPopoutId === "popout2" && <Passenger1 id="2" />}
                 {selectedPopoutId === "popout3" && <Policy id="3" />}
+                {selectedPopoutId === "popout4" && <Quotes id="4" />}
               </div>
             </div>
           )}
@@ -372,7 +376,10 @@ const ContentPage = () => {
                 pageIndex === 0 ? styles.styleA : styles.styleB
               }`}
             >
-              <div className="content-container">
+              <div
+                className="content-container"
+                style={{ color: theme.fontColor }}
+              >
                 <div className="text-part">
                   <div>
                     <div className="data-title">
