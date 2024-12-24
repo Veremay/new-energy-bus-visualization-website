@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as Hydrogen } from "../assets/svg/hydrogen-up.svg";
 import { ReactComponent as Frontwheels } from "../assets/svg/hydrogen-frontwheels.svg";
 import { ReactComponent as Backwheels } from "../assets/svg/hydrogen-backwheels.svg";
 import { ReactComponent as Pollution} from "../assets/svg/hydrogen-pollution.svg"
+import Popout from "./Popout";
 
-const ScrollCar = ({ scrollContainerRef }) => {
+const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -52,43 +53,32 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [maxScroll]);
 
-  const handleClick = () => {
-    alert("SVG clicked!");
+//   const handleClick = () => {
+//     alert("SVG clicked!");
+//   };
+//   const [selectedPopoutId, setSelectedPopoutId] = useState(null); // 记录选择的Popout IDconst [selectedPopoutId, setSelectedPopoutId] = useState(null); // 记录选择的Popout ID
+//   const [isModalVisible, setIsModalVisible] = useState(false);
+//     const [selectedImage, setSelectedImage] = useState(null); // 记录选择的图片
+//     const clickContainerRef = useRef(null); // 定义滚动容器引用
+//   const handleClick = (popoutId) => {
+//     if (clickContainerRef.current) {
+//         setSelectedPopoutId(popoutId);
+//         setIsModalVisible(true);
+//       }
+//     // setSelectedPopoutId(popoutId); // Set selected Popout ID
+//     // setIsModalVisible(true); // Show the modal
+//   };
+//   const closeModal = () => {
+//     setIsModalVisible(false);
+//     setSelectedPopoutId(null); // Clear selected Popout ID
+//   };
+const handleClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // 更新父组件状态
+    setIsModalVisible(true); // 显示模态框
   };
 
-
-//   // 切换小车逻辑
-//   useEffect(() => {
-//     if (scrollPosition < (maxScroll * 3 /8)) {
-//       setCurrentCarIndex(0); 
-//     } else if (scrollPosition < (maxScroll * 4 /8)) {
-//       setCurrentCarIndex(1); 
-//     } else if (scrollPosition < (maxScroll * 5 /8)) {
-//       setCurrentCarIndex(2); 
-//     }else if (scrollPosition < (maxScroll * 6 /8)) {
-//       setCurrentCarIndex(3); 
-//     } else if (scrollPosition < (maxScroll * 7 /8)) {
-//       setCurrentCarIndex(4); 
-//     } else if (scrollPosition < maxScroll) {
-//       setCurrentCarIndex(5); 
-//     }
-//   }, [scrollPosition]);
-
-// //   const handleAnimationComplete = () => {
-// //     if (currentCarIndex < trams.length - 1) {
-// //       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
-// //     }
-// //   };
-//   useEffect(() => {
-//     if (carPosition >= maxCarPosition) {
-//       if (currentCarIndex < trams.length - 1) {
-//         setCurrentCarIndex((prev) => prev + 1); // 切换到下一辆小车
-//       }
-//     }
-//   }, [carPosition]);
-
-
   return (
+    <>
     <motion.div
       style={{
         position: "absolute",
@@ -147,7 +137,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
                   repeat: Infinity, // 无限循环
                   ease: "easeInOut", // 缓动效果
                 }}
-                onClick={handleClick}
+                onClick={() => handleClick("popout1")}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}
@@ -164,7 +154,9 @@ const ScrollCar = ({ scrollContainerRef }) => {
         ):null)
       }
       
-    </motion.div>
+      
+      </motion.div></>
+    
     
   );
 };

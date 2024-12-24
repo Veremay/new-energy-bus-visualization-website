@@ -33,7 +33,7 @@ const ContentPage = () => {
 
   // Set background color
   document.body.style.backgroundColor = theme.bgColor;
-  document.body.style.padding = 0;
+  document.body.style.padding = 0;    
 
   const styles = {
     styleA: "styleA", // First page style
@@ -79,7 +79,7 @@ const ContentPage = () => {
       case "battery":
         return <Battery scrollContainerRef={scrollContainerRef}/>;
       case "hydrogen":
-        return <Hydrogen scrollContainerRef={scrollContainerRef}/>;
+        return <Hydrogen scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       default:
         return;
     }
@@ -113,10 +113,6 @@ const ContentPage = () => {
       });
     }
   }, [category]);
-
-  useEffect(() => {
-    console.log("scrollContainerRef.current:", scrollContainerRef.current);
-  }, []);
 
   const handleButtonClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // Set selected Popout ID
