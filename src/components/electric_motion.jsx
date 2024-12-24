@@ -134,14 +134,6 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     setIsHovered1(false);
     
   };
-  const handleMouseEnter2 = () => {
-    setIsHovered2(true);
-  };
-
-  const handleMouseLeave2 = () => {
-    setIsHovered2(false);
-    
-  };
 
   return (
     <motion.div
@@ -232,8 +224,6 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
                     ease: "easeInOut", // 缓动效果
                   }}
                   onClick={() => handleClick("popout1")}
-                onMouseEnter={handleMouseEnter2} 
-                onMouseLeave={handleMouseLeave2}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}
