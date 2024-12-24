@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
 import "typeface-inter";
@@ -175,6 +174,58 @@ const ContentPage = () => {
       });
     }
   }, [category]);
+
+  // 防抖函数：避免多次快速调用
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      const container = scrollContainerRef.current;
+      if (container) {
+        const isBottom =
+          container.scrollTop + container.clientHeight >=
+          container.scrollHeight - 5;
+        if (isBottom) {
+          if (category === "hydrogen") {
+            navigate("/ending"); // 跳转到结束页面
+          } else {
+            // 切换到下一个分类
+            const categories = [
+              "electric",
+              "charcoal",
+              "gasoline",
+              "diesel",
+              "coalgas",
+              "naturalgas",
+              "battery",
+              "hydrogen",
+            ];
+            const nextCategoryIndex =
+              (categories.indexOf(category) + 1) % categories.length;
+            setCategory(categories[nextCategoryIndex]);
+          }
+        }
+      }
+    }, 500); // 500ms 防抖时间
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [category, navigate, setCategory]);
 
   const handleButtonClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // Set selected Popout ID

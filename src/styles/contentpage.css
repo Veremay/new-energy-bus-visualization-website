@@ -66,6 +66,7 @@
   /* 确保滚动是平滑的 */
   scroll-behavior: smooth;
   -webkit-overflow-scrolling: touch;
+  transition: transform 0.3s ease-in-out; /* 平滑滚动过渡 */
 }
 
 /* 左侧文字区域 */
@@ -149,7 +150,7 @@
 .content-section {
   min-height: 100vh;
   /* z-index: -1; */
-position: relative;
+  position: relative;
 }
 
 .content-container {
