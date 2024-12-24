@@ -72,13 +72,12 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
 //     setIsModalVisible(false);
 //     setSelectedPopoutId(null); // Clear selected Popout ID
 //   };
-const handleClick = (popoutId) => {
+  const handleClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // 更新父组件状态
     setIsModalVisible(true); // 显示模态框
   };
 
   return (
-    <>
     <motion.div
       style={{
         position: "absolute",
@@ -155,7 +154,7 @@ const handleClick = (popoutId) => {
       }
       
       
-      </motion.div></>
+      </motion.div>
     
     
   );

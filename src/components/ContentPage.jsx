@@ -65,19 +65,19 @@ const ContentPage = () => {
   const getWrapperComponent = (category) => {
     switch (category) {
       case "electric":
-        return <Electric_car scrollContainerRef={scrollContainerRef}/>;
+        return <Electric_car scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "charcoal":
-        return <Charcoal scrollContainerRef={scrollContainerRef}/>;
+        return <Charcoal scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "gasoline":
-        return <Gasoline scrollContainerRef={scrollContainerRef}/>;
+        return <Gasoline scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "diesel":
-        return <Diesel scrollContainerRef={scrollContainerRef}/>;
+        return <Diesel scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "coalgas":
-        return <Coalgas scrollContainerRef={scrollContainerRef}/>;
+        return <Coalgas scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "naturalgas":
-        return <Naturalgas scrollContainerRef={scrollContainerRef}/>;
+        return <Naturalgas scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "battery":
-        return <Battery scrollContainerRef={scrollContainerRef}/>;
+        return <Battery scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       case "hydrogen":
         return <Hydrogen scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
       default:

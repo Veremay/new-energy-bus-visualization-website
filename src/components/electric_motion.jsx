@@ -21,10 +21,11 @@ import { ReactComponent as Pollution} from "../assets/svg/electric-pollution.svg
 import { ReactComponent as Pollution2} from "../assets/svg/electric-pollution2.svg"
 import { ReactComponent as People} from "../assets/svg/people-in-tram.svg"
 
-const ScrollCar = ({ scrollContainerRef }) => {
+const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible  }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
-  const [isHovered, setIsHovered] = useState(false);
+  const [isHovered1, setIsHovered1] = useState(false);
+  const [isHovered2, setIsHovered2] = useState(false);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef?.current;
@@ -120,18 +121,25 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [carPosition]);
 
-  const handleClick = () => {
-    alert("SVG clicked!");
+  const handleClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // 更新父组件状态
+    setIsModalVisible(true); // 显示模态框
   };
 
-  const handleMouseEnter = () => {
-    console.log("hhhhhhhh")
-    setIsHovered(true);
+  const handleMouseEnter1 = () => {
+    setIsHovered1(true);
   };
 
-  const handleMouseLeave = () => {
-    console.log("4")
-    setIsHovered(false);
+  const handleMouseLeave1 = () => {
+    setIsHovered1(false);
+    
+  };
+  const handleMouseEnter2 = () => {
+    setIsHovered2(true);
+  };
+
+  const handleMouseLeave2 = () => {
+    setIsHovered2(false);
     
   };
 
@@ -189,9 +197,9 @@ const ScrollCar = ({ scrollContainerRef }) => {
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
-                onMouseEnter={handleMouseEnter} 
-                onMouseLeave={handleMouseLeave} >
-              <People stroke={isHovered ? "white" : "black"} stroke-width={isHovered ? 2 : 0}/>
+                onMouseEnter={handleMouseEnter1} 
+                onMouseLeave={handleMouseLeave1} >
+              <People stroke={isHovered1 ? "white" : "black"} stroke-width={isHovered1 ? 3 : 0}/>
             </motion.div>: null}
             {currentTram?.back_wheels && (
               <div style={{ 
@@ -223,9 +231,9 @@ const ScrollCar = ({ scrollContainerRef }) => {
                     repeat: Infinity, // 无限循环
                     ease: "easeInOut", // 缓动效果
                   }}
-                onClick={handleClick}
-                onMouseEnter={handleMouseEnter} 
-                onMouseLeave={handleMouseLeave}
+                  onClick={() => handleClick("popout1")}
+                onMouseEnter={handleMouseEnter2} 
+                onMouseLeave={handleMouseLeave2}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}
