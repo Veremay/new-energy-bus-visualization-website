@@ -199,6 +199,7 @@ const ScrollCar = ({
     setIsHovered(false);
   };
   const audioRef = useRef(null);
+  const [hasPlayed, setHasPlayed] = useState(false);
   const playMusic = () => {
       if (audioRef.current) {
         audioRef.current.play();
@@ -214,11 +215,14 @@ const ScrollCar = ({
     useEffect(() => {
       // 条件判断并调用相应函数
       if (currentCarIndex===0&&scrollPosition>0) {
-        playMusic();
+        if(audioRef.current && audioRef.current.paused){
+          playMusic();
+        }
       } else {
         pauseMusic();
+        // setHasPlayed(true); 
       }
-    }, [currentCarIndex,scrollPosition]);
+    }, [currentCarIndex,scrollPosition, hasPlayed]);
 
   return (
     <motion.div

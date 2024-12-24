@@ -21,7 +21,6 @@ import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
 import Policy from "./policy";
 import Quotes from "./quotes";
-import Longroad from "./hill"
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -138,9 +137,7 @@ const ContentPage = () => {
   const getBaseComponent = (category) => {
     if (category === "electric") {
       return <Roadorail scrollContainerRef={scrollContainerRef} />;
-    } else if(category === "charcoal"){
-      return(<Longroad scrollContainerRef={scrollContainerRef} />);
-    }
+    } 
     else {
       return (
         <div className="Road" style={{ position: "fixed", bottom: "20px" }}>
