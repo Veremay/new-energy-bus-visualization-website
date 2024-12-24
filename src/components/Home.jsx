@@ -79,7 +79,7 @@ const Home = () => {
 
   return (
     <div className="grid-container">
-      <h1 className="title">从“铛铛车”到“宝宝巴士”</h1>
+      {/* <h1 className="title">从“铛铛车”到“宝宝巴士”</h1>
 
       <h2 className="subtitle">中国公交车的绿色转型</h2>
       <div className="contents">
@@ -92,6 +92,9 @@ const Home = () => {
           “宝宝巴士”
           等新能源公交车的广泛应用，中国公交车的能源使用经历了多次重大转变，犹如一部厚重的史书，不仅记录着不同时代的科技发展水平，也展现着社会对环保的不懈追求。
         </p>
+      </div> */}
+      <div>
+        <img src={require("../assets/images/title.png")} />
       </div>
 
       <div className="bus_svg">{renderSvgComponent()}</div>
