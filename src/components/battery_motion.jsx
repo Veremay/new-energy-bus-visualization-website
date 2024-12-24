@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
-import { motion, useAnimation  } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import { ReactComponent as Battery1 } from "../assets/svg/battery-up1.svg";
 import { ReactComponent as Frontwheels1 } from "../assets/svg/battery-frontwheels1.svg";
 import { ReactComponent as Backwheels1 } from "../assets/svg/battery-backwheels1.svg";
@@ -9,10 +9,14 @@ import { ReactComponent as Backwheels2 } from "../assets/svg/battery-backwheels1
 import { ReactComponent as Battery3 } from "../assets/svg/battery-up3.svg";
 import { ReactComponent as Frontwheels3 } from "../assets/svg/battery-frontwheels.svg";
 import { ReactComponent as Backwheels3 } from "../assets/svg/battery-backwheels.svg";
-import { ReactComponent as Pollution} from "../assets/svg/battery-pollutin.svg";
+import { ReactComponent as Pollution } from "../assets/svg/battery-pollutin.svg";
 import brakeSound from "../assets/sounds/brake1.mp3";
 
-const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible }) => {
+const ScrollCar = ({
+  scrollContainerRef,
+  setSelectedPopoutId,
+  setIsModalVisible,
+}) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -128,9 +132,6 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
   const handleClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // 更新父组件状态
     setIsModalVisible(true); // 显示模态框
-  const handleClick = (popoutId) => {
-    setSelectedPopoutId(popoutId); // 更新父组件状态
-    setIsModalVisible(true); // 显示模态框
   };
 
   const controls = useAnimation(); // 用于控制 Framer Motion 动画
@@ -140,20 +141,22 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     // 检测 carPosition 是否达到触发刹车动画的位置
     if (carPosition >= 600 && currentCarIndex === 1) {
       // 模拟刹车效果
-      controls.start({
-        scaleX: [1, 0.95, 1], // 横向缩放模拟刹车
-        scaleY: [1, 1.05, 1], // 纵向拉伸模拟惯性
-        rotate: [0, -2, 1, 0], // 轻微前后倾斜
-        transition: {
-          duration: 0.6, // 整体动画持续时间
-          ease: "easeOut", // 缓动效果
-          times: [0, 0.3, 0.7, 1], // 关键帧时间
-        },
-        // onAnimationStart:{playSound}
-      }).then(() => {
-        // 刹车动画完成后触发淡出动画
-        setIsFadingOut(true);
-      });
+      controls
+        .start({
+          scaleX: [1, 0.95, 1], // 横向缩放模拟刹车
+          scaleY: [1, 1.05, 1], // 纵向拉伸模拟惯性
+          rotate: [0, -2, 1, 0], // 轻微前后倾斜
+          transition: {
+            duration: 0.6, // 整体动画持续时间
+            ease: "easeOut", // 缓动效果
+            times: [0, 0.3, 0.7, 1], // 关键帧时间
+          },
+          // onAnimationStart:{playSound}
+        })
+        .then(() => {
+          // 刹车动画完成后触发淡出动画
+          setIsFadingOut(true);
+        });
     }
   }, [carPosition, 600, controls]);
 
@@ -198,78 +201,89 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       <audio ref={audioRef} src={brakeSound} preload="auto" />
       <motion.div
         animate={{
-        opacity: isFadingOut && currentCarIndex === 1 ? 0 : 1,
-        transition: {
-          duration: 1, // 淡出动画持续时间
-          ease: "easeOut",
-        },
-        }}>
-        
-      {
-        cars.map((currentCar, carIndex) => carIndex === currentCarIndex ?(
-
-          <React.Fragment key={carIndex}>
-            <motion.div
-              style={{ 
-                position: "relative",
-                zIndex: 3,
-                left: "-10%"
-               }}
-              animate={{ y: [0, -4, 0] }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}>
-              {currentCar?.body}
-            </motion.div>
-            {currentCar?.back_wheels && (
-              <div style={{
-                marginTop: carIndex <= 0 ? "-9%": carIndex === 1 ? "-9%":"-9%",
-                marginLeft: carIndex <= 0 ? "25%":carIndex === 1 ? "20%":"23%",
-                zIndex: 2 }}>
-                {currentCar.back_wheels}
-              </div>
-            )}
-            {currentCar?.front_wheels && (
-              <div style={{ 
-                position: "absolute",
-                marginTop: carIndex <= 0 ? "-12%": carIndex === 1 ? "-13%":"-14%",
-                marginLeft: carIndex <= 0 ? "2%": carIndex === 1 ? "1%":"0%",
-                zIndex: 5, }}>
-                {currentCar.front_wheels}
-              </div>
-            )}
-            {currentCar?.pollution && (
-              <motion.div 
+          opacity: isFadingOut && currentCarIndex === 1 ? 0 : 1,
+          transition: {
+            duration: 1, // 淡出动画持续时间
+            ease: "easeOut",
+          },
+        }}
+      >
+        {cars.map((currentCar, carIndex) =>
+          carIndex === currentCarIndex ? (
+            <React.Fragment key={carIndex}>
+              <motion.div
                 style={{
-                  marginTop: carIndex === 2? "-19%":"-17%",
-                  marginLeft: carIndex === 2? "-32%":"-28%",
-                  cursor: "pointer",
-                  zIndex: "2"
+                  position: "relative",
+                  zIndex: 3,
+                  left: "-10%",
                 }}
-                animate={{ opacity: [1, 0.3, 1]}}
+                animate={{ y: [0, -4, 0] }}
                 transition={{
-                  duration: 1, // 动画持续时间
-                  repeat: Infinity, // 无限循环
-                  ease: "easeInOut", // 缓动效果
+                  duration: 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
-                onClick={() => handleClick("popout1")}
               >
-                <motion.div 
-                  animate={{y: [0, -4, 0]}}
+                {currentCar?.body}
+              </motion.div>
+              {currentCar?.back_wheels && (
+                <div
+                  style={{
+                    marginTop:
+                      carIndex <= 0 ? "-9%" : carIndex === 1 ? "-9%" : "-9%",
+                    marginLeft:
+                      carIndex <= 0 ? "25%" : carIndex === 1 ? "20%" : "23%",
+                    zIndex: 2,
+                  }}
+                >
+                  {currentCar.back_wheels}
+                </div>
+              )}
+              {currentCar?.front_wheels && (
+                <div
+                  style={{
+                    position: "absolute",
+                    marginTop:
+                      carIndex <= 0 ? "-12%" : carIndex === 1 ? "-13%" : "-14%",
+                    marginLeft:
+                      carIndex <= 0 ? "2%" : carIndex === 1 ? "1%" : "0%",
+                    zIndex: 5,
+                  }}
+                >
+                  {currentCar.front_wheels}
+                </div>
+              )}
+              {currentCar?.pollution && (
+                <motion.div
+                  style={{
+                    marginTop: carIndex === 2 ? "-19%" : "-17%",
+                    marginLeft: carIndex === 2 ? "-32%" : "-28%",
+                    cursor: "pointer",
+                    zIndex: "2",
+                  }}
+                  animate={{ opacity: [1, 0.3, 1] }}
                   transition={{
-                    duration: 0.3, // 动画持续时间
+                    duration: 1, // 动画持续时间
                     repeat: Infinity, // 无限循环
                     ease: "easeInOut", // 缓动效果
-                  }}>
-                  <Pollution />
-                </motion.div></motion.div>)}
-            
-          </React.Fragment>
-          
-        ):null)
-      }
+                  }}
+                  onClick={() => handleClick("popout1")}
+                >
+                  <motion.div
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{
+                      duration: 0.3, // 动画持续时间
+                      repeat: Infinity, // 无限循环
+                      ease: "easeInOut", // 缓动效果
+                    }}
+                  >
+                    <Pollution />
+                  </motion.div>
+                </motion.div>
+              )}
+            </React.Fragment>
+          ) : null
+        )}
       </motion.div>
     </motion.div>
   );
