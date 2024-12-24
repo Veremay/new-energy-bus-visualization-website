@@ -10,13 +10,13 @@ import { ReactComponent as Road } from "../assets/svg/Road.svg";
 
 import Electric_car from "./electric_motion";
 import Roadorail from "./roadorail";
-import Charcoal from "./charcoal_motion"
-import Gasoline from "./gasoline_motion"
-import Diesel from "./diesel_motion"
-import Coalgas from "./coalgas_motion"
-import Naturalgas from "./naturalgas_motion"
-import Battery from "./battery_motion"
-import Hydrogen from "./hydrogen_motion"
+import Charcoal from "./charcoal_motion";
+import Gasoline from "./gasoline_motion";
+import Diesel from "./diesel_motion";
+import Coalgas from "./coalgas_motion";
+import Naturalgas from "./naturalgas_motion";
+import Battery from "./battery_motion";
+import Hydrogen from "./hydrogen_motion";
 import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
@@ -33,7 +33,7 @@ const ContentPage = () => {
 
   // Set background color
   document.body.style.backgroundColor = theme.bgColor;
-  document.body.style.padding = 0;    
+  document.body.style.padding = 0;
 
   const styles = {
     styleA: "styleA", // First page style
@@ -65,21 +65,27 @@ const ContentPage = () => {
   const getWrapperComponent = (category) => {
     switch (category) {
       case "electric":
-        return <Electric_car scrollContainerRef={scrollContainerRef}/>;
+        return <Electric_car scrollContainerRef={scrollContainerRef} />;
       case "charcoal":
-        return <Charcoal scrollContainerRef={scrollContainerRef}/>;
+        return <Charcoal scrollContainerRef={scrollContainerRef} />;
       case "gasoline":
-        return <Gasoline scrollContainerRef={scrollContainerRef}/>;
+        return <Gasoline scrollContainerRef={scrollContainerRef} />;
       case "diesel":
-        return <Diesel scrollContainerRef={scrollContainerRef}/>;
+        return <Diesel scrollContainerRef={scrollContainerRef} />;
       case "coalgas":
-        return <Coalgas scrollContainerRef={scrollContainerRef}/>;
+        return <Coalgas scrollContainerRef={scrollContainerRef} />;
       case "naturalgas":
-        return <Naturalgas scrollContainerRef={scrollContainerRef}/>;
+        return <Naturalgas scrollContainerRef={scrollContainerRef} />;
       case "battery":
-        return <Battery scrollContainerRef={scrollContainerRef}/>;
+        return <Battery scrollContainerRef={scrollContainerRef} />;
       case "hydrogen":
-        return <Hydrogen scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return (
+          <Hydrogen
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
       default:
         return;
     }
@@ -113,6 +119,47 @@ const ContentPage = () => {
       });
     }
   }, [category]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const container = scrollContainerRef.current;
+      if (container) {
+        const isBottom =
+          container.scrollTop + container.clientHeight >=
+          container.scrollHeight - 5;
+        if (isBottom) {
+          if (category === "hydrogen") {
+            navigate("/ending"); // 跳转到结束页面
+          } else {
+            // 切换到下一个分类
+            const categories = [
+              "electric",
+              "charcoal",
+              "gasoline",
+              "diesel",
+              "coalgas",
+              "naturalgas",
+              "battery",
+              "hydrogen",
+            ];
+            const nextCategoryIndex =
+              (categories.indexOf(category) + 1) % categories.length;
+            setCategory(categories[nextCategoryIndex]);
+          }
+        }
+      }
+    };
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [category, navigate, setCategory]);
 
   const handleButtonClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // Set selected Popout ID
