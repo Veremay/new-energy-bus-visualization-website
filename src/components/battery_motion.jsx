@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion, useAnimation  } from "framer-motion";
 import { ReactComponent as Battery1 } from "../assets/svg/battery-up1.svg";
 import { ReactComponent as Frontwheels1 } from "../assets/svg/battery-frontwheels1.svg";
@@ -9,9 +9,10 @@ import { ReactComponent as Backwheels2 } from "../assets/svg/battery-backwheels1
 import { ReactComponent as Battery3 } from "../assets/svg/battery-up3.svg";
 import { ReactComponent as Frontwheels3 } from "../assets/svg/battery-frontwheels.svg";
 import { ReactComponent as Backwheels3 } from "../assets/svg/battery-backwheels.svg";
-import { ReactComponent as Pollution} from "../assets/svg/battery-pollutin.svg"
+import { ReactComponent as Pollution} from "../assets/svg/battery-pollutin.svg";
+import brakeSound from "../assets/sounds/brake1.mp3";
 
-const ScrollCar = ({ scrollContainerRef }) => {
+const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -97,8 +98,9 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [carPosition]);
 
-  const handleClick = () => {
-    alert("SVG clicked!");
+  const handleClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // 更新父组件状态
+    setIsModalVisible(true); // 显示模态框
   };
 
   const controls = useAnimation(); // 用于控制 Framer Motion 动画
@@ -117,12 +119,36 @@ const ScrollCar = ({ scrollContainerRef }) => {
           ease: "easeOut", // 缓动效果
           times: [0, 0.3, 0.7, 1], // 关键帧时间
         },
+        // onAnimationStart:{playSound}
       }).then(() => {
         // 刹车动画完成后触发淡出动画
         setIsFadingOut(true);
       });
     }
   }, [carPosition, 600, controls]);
+
+  const audioRef = useRef(null);
+
+  const playMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.play();
+    }
+  };
+
+  const pauseMusic = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+    }
+  };
+
+  useEffect(() => {
+    // 条件判断并调用相应函数
+    if (currentCarIndex === 1 && carPosition === 600) {
+      playMusic();
+    } else {
+      pauseMusic();
+    }
+  }, [currentCarIndex, carPosition]); // 依赖项数组，监听相关变量的变化
 
   return (
     <motion.div
@@ -139,6 +165,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
       }}
       animate={controls}
     >
+      <audio ref={audioRef} src={brakeSound} preload="auto" />
       <motion.div
         animate={{
         opacity: isFadingOut && currentCarIndex === 1 ? 0 : 1,
@@ -197,7 +224,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
                   repeat: Infinity, // 无限循环
                   ease: "easeInOut", // 缓动效果
                 }}
-                onClick={handleClick}
+                onClick={() => handleClick("popout1")}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}

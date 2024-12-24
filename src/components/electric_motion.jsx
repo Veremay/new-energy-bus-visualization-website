@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { motion } from "framer-motion";
 import { ReactComponent as Tram1 } from "../assets/svg/tram1.svg";
 import { ReactComponent as Connected_line } from "../assets/svg/connected-line1.svg";
@@ -21,6 +21,7 @@ import { ReactComponent as Pollution} from "../assets/svg/electric-pollution.svg
 import { ReactComponent as Pollution2} from "../assets/svg/electric-pollution2.svg"
 import { ReactComponent as People} from "../assets/svg/people-in-tram.svg"
 import { ReactComponent as Tooltip} from "../assets/svg/tram1-tooltip.svg"
+import Dangdang from "../assets/sounds/dangdang1.mp3";
 
 
 const ScrollCar = ({
@@ -197,6 +198,27 @@ const ScrollCar = ({
   const handleMouseLeave = () => {
     setIsHovered(false);
   };
+  const audioRef = useRef(null);
+  const playMusic = () => {
+      if (audioRef.current) {
+        audioRef.current.play();
+      }
+    };
+  
+    const pauseMusic = () => {
+      if (audioRef.current) {
+        audioRef.current.pause();
+      }
+    };
+  
+    useEffect(() => {
+      // 条件判断并调用相应函数
+      if (currentCarIndex===0&&scrollPosition>0) {
+        playMusic();
+      } else {
+        pauseMusic();
+      }
+    }, [currentCarIndex,scrollPosition]);
 
   return (
     <motion.div
@@ -210,6 +232,7 @@ const ScrollCar = ({
         alignItems: "center",
       }}
     >
+      <audio ref={audioRef} src={Dangdang} preload="auto" />
       {trams.map((currentTram, tramIndex) =>
         tramIndex === currentCarIndex ? (
           <React.Fragment key={tramIndex}>

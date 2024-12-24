@@ -6,7 +6,7 @@ import "../styles/contentpage.css";
 import data from "../assets/data/data.json";
 import BusStop from "./bus_stop";
 import { ReactComponent as Road } from "../assets/svg/Road.svg";
-
+// import { ReactComponent as Longroad } from "../assets/svg/longroad.svg";
 import Electric_car from "./electric_motion";
 import Roadorail from "./roadorail";
 import Charcoal from "./charcoal_motion";
@@ -20,6 +20,7 @@ import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
 import Policy from "./policy";
+import Longroad from "./hill"
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -71,18 +72,6 @@ const ContentPage = () => {
             setIsModalVisible={setIsModalVisible}
           />
         );
-      case "charcoal":
-        return <Charcoal scrollContainerRef={scrollContainerRef} />;
-      case "gasoline":
-        return <Gasoline scrollContainerRef={scrollContainerRef} />;
-      case "diesel":
-        return <Diesel scrollContainerRef={scrollContainerRef} />;
-      case "coalgas":
-        return <Coalgas scrollContainerRef={scrollContainerRef} />;
-      case "naturalgas":
-        return <Naturalgas scrollContainerRef={scrollContainerRef} />;
-      case "battery":
-        return <Battery scrollContainerRef={scrollContainerRef} />;
 
       case "charcoal":
         return (
@@ -150,7 +139,7 @@ const ContentPage = () => {
     if (category === "electric") {
       return <Roadorail scrollContainerRef={scrollContainerRef} />;
     } else if(category === "charcoal"){
-      
+      return(<Longroad scrollContainerRef={scrollContainerRef} />);
     }
     else {
       return (
