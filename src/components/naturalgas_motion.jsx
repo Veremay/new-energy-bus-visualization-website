@@ -8,7 +8,7 @@ import { ReactComponent as Frontwheels2 } from "../assets/svg/naturalgas-frontwh
 import { ReactComponent as Backwheels2 } from "../assets/svg/naturalgas-backwheels2.svg";
 import { ReactComponent as Pollution} from "../assets/svg/naturalgas-pollution.svg"
 
-const ScrollCar = ({ scrollContainerRef }) => {
+const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -72,11 +72,6 @@ const ScrollCar = ({ scrollContainerRef }) => {
     } 
   }, [scrollPosition]);
 
-//   const handleAnimationComplete = () => {
-//     if (currentCarIndex < trams.length - 1) {
-//       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
-//     }
-//   };
   useEffect(() => {
     if (carPosition >= maxCarPosition) {
       if (currentCarIndex < cars.length - 1) {
@@ -85,8 +80,9 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [carPosition]);
 
-  const handleClick = () => {
-    alert("SVG clicked!");
+  const handleClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // 更新父组件状态
+    setIsModalVisible(true); // 显示模态框
   };
 
   return (
@@ -163,7 +159,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
                   repeat: Infinity, // 无限循环
                   ease: "easeInOut", // 缓动效果
                 }}
-                onClick={handleClick}
+                onClick={() => handleClick("popout1")}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}

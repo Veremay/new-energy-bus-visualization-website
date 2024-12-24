@@ -88,7 +88,10 @@ const ContentPage = () => {
   const getBaseComponent = (category) => {
     if (category === "electric") {
       return <Roadorail scrollContainerRef={scrollContainerRef} />;
-    } else {
+    } else if(category === "charcoal"){
+      
+    }
+    else {
       return (
         <div className="Road" style={{ position: "fixed", bottom: "20px" }}>
           <Road />

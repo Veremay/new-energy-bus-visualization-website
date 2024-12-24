@@ -20,12 +20,12 @@ import { ReactComponent as Tram2_1 } from "../assets/svg/tram2-1.svg"
 import { ReactComponent as Pollution} from "../assets/svg/electric-pollution.svg"
 import { ReactComponent as Pollution2} from "../assets/svg/electric-pollution2.svg"
 import { ReactComponent as People} from "../assets/svg/people-in-tram.svg"
+import { ReactComponent as Tooltip} from "../assets/svg/tram1-tooltip.svg"
 
 const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible  }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
   const [isHovered1, setIsHovered1] = useState(false);
-  const [isHovered2, setIsHovered2] = useState(false);
 
   useEffect(() => {
     const scrollContainer = scrollContainerRef?.current;
@@ -132,7 +132,13 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
 
   const handleMouseLeave1 = () => {
     setIsHovered1(false);
-    
+  };
+
+  const [isVisible, setIsVisible] = useState(false); // 控制组件显示/隐藏
+
+  // 切换显示状态
+  const toggleVisibility = () => {
+    setIsVisible((prev) => !prev);
   };
 
   return (
@@ -189,6 +195,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
                   repeat: Infinity,
                   ease: "easeInOut",
                 }}
+                onClick={toggleVisibility}
                 onMouseEnter={handleMouseEnter1} 
                 onMouseLeave={handleMouseLeave1} >
               <People stroke={isHovered1 ? "white" : "black"} stroke-width={isHovered1 ? 3 : 0}/>
@@ -240,7 +247,21 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
           
         ):null)
       }
-      
+      {isVisible && currentCarIndex === 0 &&(
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -20 }}
+          style={{
+            position: "absolute",
+            top: "20px",
+            left: "600px",
+            zIndex: 7
+          }}
+        >
+          <Tooltip />
+        </motion.div>
+      )}
     </motion.div>
     
   );
