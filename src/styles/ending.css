@@ -1,3 +1,9 @@
+html {
+  font-family: PingFangSC, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .flex-container {
   display: flex;
   flex-direction: column;
@@ -19,7 +25,7 @@
   align-items: center;
 }
 
-.text-part {
+.text-block {
   color: #fff;
   font-weight: 300;
   font-size: medium;

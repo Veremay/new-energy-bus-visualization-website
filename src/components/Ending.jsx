@@ -1,13 +1,18 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/ending.css";
+import "typeface-inter";
 import Ratio from "./ratio";
+import Quotes from "./quotes";
 import { ReactComponent as Overview } from "../assets/svg/overview.svg";
+import { ThemeContext } from "../ThemeContext";
 
 const EndingPage = () => {
   const location = useLocation(); // 获取当前路由
   const navigate = useNavigate();
+  const { theme, category, setCategory } = useContext(ThemeContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [selectedPopoutId, setSelectedPopoutId] = useState(null); // 记录选择的Popout ID
 
   const isContentPage = location.pathname === "/content"; // 判断是否在 /content 页面
   if (!isContentPage) {
@@ -17,31 +22,36 @@ const EndingPage = () => {
 
   const isEndingPage = location.pathname === "/ending";
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (popoutId) => {
+    setSelectedPopoutId(popoutId); // Set selected Popout ID
     setIsModalVisible(true); // Show the modal
   };
 
   const closeModal = () => {
     setIsModalVisible(false);
+    setSelectedPopoutId(null); // Clear selected Popout ID
   };
+
   return (
     <div className="flex-container">
       <div className="header">
         <div className="nav-back">
           <button
             className="arrow-button"
-            style={{ color: "#fff" }}
             onClick={() => {
               if (isEndingPage) navigate("/");
             }}
           >
-            <p>中国公交“源”来如此</p>
+            <p style={{ color: "#fff" }}>中国公交“源”来如此</p>
           </button>
           <p style={{ fontWeight: "bold" }}></p>
         </div>
 
         <div>
-          <button className="quotation-button">
+          <button
+            className="quotation-button"
+            onClick={() => handleButtonClick("popout4")}
+          >
             <svg
               t="1734679850423"
               class="icon"
@@ -62,7 +72,7 @@ const EndingPage = () => {
       </div>
 
       <div className="content-container">
-        <div className="text-part">
+        <div className="text-block">
           <p>
             在当下的城市街头，
             “宝宝巴士”新能源公交车以小巧可爱的外形、清新的色彩搭配以及环保的能源利用方式，成为城市公共交通中一道独特的风景线。
@@ -88,7 +98,7 @@ const EndingPage = () => {
                 width: "20px",
                 height: "20px",
               }}
-              onClick={handleButtonClick}
+              onClick={() => handleButtonClick("popout5")}
             >
               <svg
                 t="1734945717887"
@@ -155,7 +165,11 @@ const EndingPage = () => {
                   >
                     &times;
                   </button>
-                  <Ratio />
+
+                  {/* 根据选择的Popout ID 渲染不同的Popout内容 */}
+
+                  {selectedPopoutId === "popout4" && <Quotes id="4" />}
+                  {selectedPopoutId === "popout5" && <Ratio id="5" />}
                 </div>
               </div>
             )}

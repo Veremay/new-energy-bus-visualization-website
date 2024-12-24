@@ -4,8 +4,8 @@ export const ThemeContext = createContext();
 
 export const ThemeProvider = ({ children }) => {
   const [theme, setTheme] = useState({
-    bgColor: "#f0f0f0",
-    fontColor: "#000",
+    bgColor: "#006fff",
+    fontColor: "#fff",
   });
 
   const [category, setCategory] = useState("babybus"); // 默认分类
@@ -47,11 +47,11 @@ export const ThemeProvider = ({ children }) => {
         setTheme({ bgColor: "#8AE0FF", fontColor: "#000" });
         break;
       default:
-        setTheme({ bgColor: "#f0f0f0", fontColor: "#000" });
+        setTheme({ bgColor: "#006fff", fontColor: "#fff" });
     }
   }, [category]);
 
-  console.log(category);
+  console.log(theme);
 
   return (
     <ThemeContext.Provider value={{ theme, category, setCategory }}>

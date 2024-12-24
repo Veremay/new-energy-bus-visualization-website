@@ -20,6 +20,7 @@ import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
 import Policy from "./policy";
+import Quotes from "./quotes";
 
 const ContentPage = () => {
   const { theme, category, setCategory } = useContext(ThemeContext);
@@ -59,7 +60,6 @@ const ContentPage = () => {
   // const currentData = data[category][currentPage];
 
   const categoryData = data[category];
-  console.log(categoryData);
 
   const getWrapperComponent = (category) => {
     switch (category) {
@@ -71,18 +71,6 @@ const ContentPage = () => {
             setIsModalVisible={setIsModalVisible}
           />
         );
-      case "charcoal":
-        return <Charcoal scrollContainerRef={scrollContainerRef} />;
-      case "gasoline":
-        return <Gasoline scrollContainerRef={scrollContainerRef} />;
-      case "diesel":
-        return <Diesel scrollContainerRef={scrollContainerRef} />;
-      case "coalgas":
-        return <Coalgas scrollContainerRef={scrollContainerRef} />;
-      case "naturalgas":
-        return <Naturalgas scrollContainerRef={scrollContainerRef} />;
-      case "battery":
-        return <Battery scrollContainerRef={scrollContainerRef} />;
 
       case "charcoal":
         return (
@@ -149,10 +137,8 @@ const ContentPage = () => {
   const getBaseComponent = (category) => {
     if (category === "electric") {
       return <Roadorail scrollContainerRef={scrollContainerRef} />;
-    } else if(category === "charcoal"){
-      
-    }
-    else {
+    } else if (category === "charcoal") {
+    } else {
       return (
         <div className="Road" style={{ position: "fixed", bottom: "20px" }}>
           <Road />
@@ -271,7 +257,10 @@ const ContentPage = () => {
           <button
             className="quotation-button"
             style={{ color: theme.fontColor, "--fill": theme.fontColor }}
-            onClick={() => handleButtonClick("popout1")}
+            onClick={() =>
+              // handleStatClick(`statistic_${idx + 1}.png`)
+              handleButtonClick("popout4")
+            }
           >
             <svg
               t="1734679850423"
@@ -337,6 +326,7 @@ const ContentPage = () => {
                 {selectedPopoutId === "popout1" && <Popout id="1" />}
                 {selectedPopoutId === "popout2" && <Passenger1 id="2" />}
                 {selectedPopoutId === "popout3" && <Policy id="3" />}
+                {selectedPopoutId === "popout4" && <Quotes id="4" />}
               </div>
             </div>
           )}
@@ -383,7 +373,10 @@ const ContentPage = () => {
                 pageIndex === 0 ? styles.styleA : styles.styleB
               }`}
             >
-              <div className="content-container">
+              <div
+                className="content-container"
+                style={{ color: theme.fontColor }}
+              >
                 <div className="text-part">
                   <div>
                     <div className="data-title">
