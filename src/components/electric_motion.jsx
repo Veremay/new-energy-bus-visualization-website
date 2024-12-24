@@ -215,7 +215,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
                   marginTop: tramIndex === 0? "6%" : tramIndex === 1? "-10%" : tramIndex === 2? "-6%" : tramIndex === 3? "-19%" :"-17%",
                   marginLeft: tramIndex === 0? "-120%" : tramIndex === 1? "-115%" : tramIndex === 2? "-110%" : tramIndex === 3? "-125%" : "-120%",
                   cursor: "pointer",
-                  zIndex: "5"
+                  zIndex: "2"
                 }}
                 animate={{ opacity: [1, 0.3, 1]}}
                 transition={{

@@ -1,12 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { ReactComponent as Naturalgas1 } from "../assets/svg/naturalgas-up.svg";
-import { ReactComponent as Frontwheels1 } from "../assets/svg/naturalgas-frontwheels.svg";
-import { ReactComponent as Backwheels1 } from "../assets/svg/naturalgas-backwheels.svg";
-import { ReactComponent as Naturalgas2 } from "../assets/svg/naturalgas-up2.svg";
-import { ReactComponent as Frontwheels2 } from "../assets/svg/naturalgas-frontwheels2.svg";
-import { ReactComponent as Backwheels2 } from "../assets/svg/naturalgas-backwheels2.svg";
-import { ReactComponent as Pollution} from "../assets/svg/naturalgas-pollution.svg"
+import { ReactComponent as Hydrogen } from "../assets/svg/hydrogen-up.svg";
+import { ReactComponent as Frontwheels } from "../assets/svg/hydrogen-frontwheels.svg";
+import { ReactComponent as Backwheels } from "../assets/svg/hydrogen-backwheels.svg";
+import { ReactComponent as Pollution} from "../assets/svg/hydrogen-pollution.svg"
 
 const ScrollCar = ({ scrollContainerRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
@@ -34,13 +31,10 @@ const ScrollCar = ({ scrollContainerRef }) => {
     };
   }, [scrollContainerRef]);
 
-  const maxCarPosition = 3500; // 设置小车的最大移动范围
-//   const carPosition = maxScroll / 5
-//   const carPosition = Math.min((scrollPosition / maxScroll) * maxCarPosition, maxCarPosition);
+  const maxCarPosition = 2500; // 设置小车的最大移动范围
   const [currentCarIndex, setCurrentCarIndex] = useState(0); // 当前显示的小车索引
-  const car1 = {'body': <Naturalgas1 />, 'back_wheels': <Backwheels1 />, 'front_wheels': <Frontwheels1 />, 'pollution': <Pollution />};
-  const car2 = {'body': <Naturalgas2 />, 'back_wheels': <Backwheels2 />, 'front_wheels': <Frontwheels2 />, 'pollution': <Pollution />};
-  const cars = [car1, car2];
+  const car1 = {'body': <Hydrogen />, 'back_wheels': <Backwheels />, 'front_wheels': <Frontwheels />, 'pollution': <Pollution />};
+  const cars = [car1];
 
   const speedFactor = 0.5;
 
@@ -48,12 +42,7 @@ const ScrollCar = ({ scrollContainerRef }) => {
     if (maxScroll === 0) {
       return 0; // 初始加载时，小车位置为起始点
     }
-    if (scrollPosition < (maxScroll * 2 / 3)) {
-      return ((scrollPosition / (maxScroll * 2 / 3)) * maxCarPosition) * 0.4;
-    } 
-      return (((scrollPosition - (maxScroll * 2 / 3)) / (maxScroll * 1 / 3)) * maxCarPosition - 500) * speedFactor;
-    
-    
+    return scrollPosition / maxScroll * maxCarPosition * speedFactor; 
   })();
   
 
@@ -63,31 +52,41 @@ const ScrollCar = ({ scrollContainerRef }) => {
     }
   }, [maxScroll]);
 
-  // 切换小车逻辑
-  useEffect(() => {
-    if (scrollPosition < (maxScroll * 2 /3)) {
-      setCurrentCarIndex(0); 
-    } else if (scrollPosition < maxScroll) {
-      setCurrentCarIndex(1); 
-    } 
-  }, [scrollPosition]);
-
-//   const handleAnimationComplete = () => {
-//     if (currentCarIndex < trams.length - 1) {
-//       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
-//     }
-//   };
-  useEffect(() => {
-    if (carPosition >= maxCarPosition) {
-      if (currentCarIndex < cars.length - 1) {
-        setCurrentCarIndex((prev) => prev + 1); // 切换到下一辆小车
-      }
-    }
-  }, [carPosition]);
-
   const handleClick = () => {
     alert("SVG clicked!");
   };
+
+
+//   // 切换小车逻辑
+//   useEffect(() => {
+//     if (scrollPosition < (maxScroll * 3 /8)) {
+//       setCurrentCarIndex(0); 
+//     } else if (scrollPosition < (maxScroll * 4 /8)) {
+//       setCurrentCarIndex(1); 
+//     } else if (scrollPosition < (maxScroll * 5 /8)) {
+//       setCurrentCarIndex(2); 
+//     }else if (scrollPosition < (maxScroll * 6 /8)) {
+//       setCurrentCarIndex(3); 
+//     } else if (scrollPosition < (maxScroll * 7 /8)) {
+//       setCurrentCarIndex(4); 
+//     } else if (scrollPosition < maxScroll) {
+//       setCurrentCarIndex(5); 
+//     }
+//   }, [scrollPosition]);
+
+// //   const handleAnimationComplete = () => {
+// //     if (currentCarIndex < trams.length - 1) {
+// //       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
+// //     }
+// //   };
+//   useEffect(() => {
+//     if (carPosition >= maxCarPosition) {
+//       if (currentCarIndex < trams.length - 1) {
+//         setCurrentCarIndex((prev) => prev + 1); // 切换到下一辆小车
+//       }
+//     }
+//   }, [carPosition]);
+
 
   return (
     <motion.div
@@ -106,21 +105,6 @@ const ScrollCar = ({ scrollContainerRef }) => {
 
           <React.Fragment key={carIndex}>
             <motion.div
-              animate={{
-                scaleY: [1, 0.95, 1], 
-              }}
-              transition={{
-                duration: 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-              style={{ 
-                transformOrigin: "top",
-                marginBottom: "-3%",
-              }} >
-              {currentCar?.connected_line}
-            </motion.div>
-            <motion.div
               style={{ 
                 zIndex: 3,
                 left: "-10%"
@@ -135,16 +119,16 @@ const ScrollCar = ({ scrollContainerRef }) => {
             </motion.div>
             {currentCar?.back_wheels && (
               <div style={{ 
-                marginTop: carIndex === 0 ? "-9%":"-8%",
-                marginLeft: carIndex === 0 ? "28%":"25%",
+                marginTop: "-7%",
+                marginLeft: "26%",
                 zIndex: 2 }}>
                 {currentCar.back_wheels}
               </div>
             )}
             {currentCar?.front_wheels && (
               <div style={{ 
-                marginTop: carIndex === 0 ? "-12%": "-12%",
-                marginLeft: carIndex === 0 ? "-16%": "-12%",
+                marginTop: "-12.5%",
+                marginLeft: "-12%",
                 zIndex: 4, }}>
                 {currentCar.front_wheels}
               </div>
@@ -152,8 +136,8 @@ const ScrollCar = ({ scrollContainerRef }) => {
             {currentCar?.pollution && (
               <motion.div 
                 style={{
-                  marginTop: "-17%",
-                  marginLeft: "-120%",
+                  marginTop: "-11%",
+                  marginLeft: "-115%",
                   cursor: "pointer",
                   zIndex: "2"
                 }}

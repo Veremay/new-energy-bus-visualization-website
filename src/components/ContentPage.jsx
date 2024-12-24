@@ -15,6 +15,8 @@ import Gasoline from "./gasoline_motion"
 import Diesel from "./diesel_motion"
 import Coalgas from "./coalgas_motion"
 import Naturalgas from "./naturalgas_motion"
+import Battery from "./battery_motion"
+import Hydrogen from "./hydrogen_motion"
 import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
@@ -74,6 +76,10 @@ const ContentPage = () => {
         return <Coalgas scrollContainerRef={scrollContainerRef}/>;
       case "naturalgas":
         return <Naturalgas scrollContainerRef={scrollContainerRef}/>;
+      case "battery":
+        return <Battery scrollContainerRef={scrollContainerRef}/>;
+      case "hydrogen":
+        return <Hydrogen scrollContainerRef={scrollContainerRef}/>;
       default:
         return;
     }
