@@ -52,13 +52,33 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       setCurrentCarIndex(0); // 设置初始小车
     }
   }, [maxScroll]);
-
-  const handleClick = (popoutId) => {
+ 
+//   const handleClick = () => {
+//     alert("SVG clicked!");
+//   };
+//   const [selectedPopoutId, setSelectedPopoutId] = useState(null); // 记录选择的Popout IDconst [selectedPopoutId, setSelectedPopoutId] = useState(null); // 记录选择的Popout ID
+//   const [isModalVisible, setIsModalVisible] = useState(false);
+//     const [selectedImage, setSelectedImage] = useState(null); // 记录选择的图片
+//     const clickContainerRef = useRef(null); // 定义滚动容器引用
+//   const handleClick = (popoutId) => {
+//     if (clickContainerRef.current) {
+//         setSelectedPopoutId(popoutId);
+//         setIsModalVisible(true);
+//       }
+//     // setSelectedPopoutId(popoutId); // Set selected Popout ID
+//     // setIsModalVisible(true); // Show the modal
+//   };
+//   const closeModal = () => {
+//     setIsModalVisible(false);
+//     setSelectedPopoutId(null); // Clear selected Popout ID
+//   };
+const handleClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // 更新父组件状态
     setIsModalVisible(true); // 显示模态框
   };
 
   return (
+    <>
     <motion.div
       style={{
         position: "absolute",
@@ -135,7 +155,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       }
       
       
-      </motion.div>
+      </motion.div></>
     
     
   );

@@ -11,7 +11,7 @@ import { ReactComponent as Frontwheels3 } from "../assets/svg/battery-frontwheel
 import { ReactComponent as Backwheels3 } from "../assets/svg/battery-backwheels.svg";
 import { ReactComponent as Pollution} from "../assets/svg/battery-pollutin.svg"
 
-const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible }) => {
+const ScrollCar = ({ scrollContainerRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -97,6 +97,10 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     }
   }, [carPosition]);
 
+  const handleClick = () => {
+    alert("SVG clicked!");
+  };
+
   const controls = useAnimation(); // 用于控制 Framer Motion 动画
   const [isFadingOut, setIsFadingOut] = React.useState(false);
 
@@ -119,11 +123,6 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       });
     }
   }, [carPosition, 600, controls]);
-
-  const handleClick = (popoutId) => {
-    setSelectedPopoutId(popoutId); // 更新父组件状态
-    setIsModalVisible(true); // 显示模态框
-  };
 
   return (
     <motion.div
@@ -198,7 +197,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
                   repeat: Infinity, // 无限循环
                   ease: "easeInOut", // 缓动效果
                 }}
-                onClick={() => handleClick("popout1")}
+                onClick={handleClick}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}

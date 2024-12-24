@@ -5,7 +5,7 @@ import { ReactComponent as Frontwheels } from "../assets/svg/charcoal-front-whee
 import { ReactComponent as Backwheels } from "../assets/svg/charcoal-back-wheels1.svg";
 import { ReactComponent as Pollution} from "../assets/svg/charcoal-pollution.svg"
 
-const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible  }) => {
+const ScrollCar = ({ scrollContainerRef }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const [maxScroll, setMaxScroll] = useState(0);
 
@@ -52,10 +52,41 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     }
   }, [maxScroll]);
 
-  const handleClick = (popoutId) => {
-    setSelectedPopoutId(popoutId); // 更新父组件状态
-    setIsModalVisible(true); // 显示模态框
+  const handleClick = () => {
+    alert("SVG clicked!");
   };
+
+
+//   // 切换小车逻辑
+//   useEffect(() => {
+//     if (scrollPosition < (maxScroll * 3 /8)) {
+//       setCurrentCarIndex(0); 
+//     } else if (scrollPosition < (maxScroll * 4 /8)) {
+//       setCurrentCarIndex(1); 
+//     } else if (scrollPosition < (maxScroll * 5 /8)) {
+//       setCurrentCarIndex(2); 
+//     }else if (scrollPosition < (maxScroll * 6 /8)) {
+//       setCurrentCarIndex(3); 
+//     } else if (scrollPosition < (maxScroll * 7 /8)) {
+//       setCurrentCarIndex(4); 
+//     } else if (scrollPosition < maxScroll) {
+//       setCurrentCarIndex(5); 
+//     }
+//   }, [scrollPosition]);
+
+// //   const handleAnimationComplete = () => {
+// //     if (currentCarIndex < trams.length - 1) {
+// //       setCurrentCarIndex((prev) => prev + 1); // 跳到下一辆车
+// //     }
+// //   };
+//   useEffect(() => {
+//     if (carPosition >= maxCarPosition) {
+//       if (currentCarIndex < trams.length - 1) {
+//         setCurrentCarIndex((prev) => prev + 1); // 切换到下一辆小车
+//       }
+//     }
+//   }, [carPosition]);
+
 
   return (
     <motion.div
@@ -116,7 +147,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
                   repeat: Infinity, // 无限循环
                   ease: "easeInOut", // 缓动效果
                 }}
-                onClick={() => handleClick("popout1")}
+                onClick={handleClick}
               >
                 <motion.div 
                   animate={{y: [0, -4, 0]}}

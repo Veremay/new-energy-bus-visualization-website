@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ThemeContext } from "../ThemeContext";
 import "typeface-inter";
@@ -10,13 +9,13 @@ import { ReactComponent as Road } from "../assets/svg/Road.svg";
 
 import Electric_car from "./electric_motion";
 import Roadorail from "./roadorail";
-import Charcoal from "./charcoal_motion"
-import Gasoline from "./gasoline_motion"
-import Diesel from "./diesel_motion"
-import Coalgas from "./coalgas_motion"
-import Naturalgas from "./naturalgas_motion"
-import Battery from "./battery_motion"
-import Hydrogen from "./hydrogen_motion"
+import Charcoal from "./charcoal_motion";
+import Gasoline from "./gasoline_motion";
+import Diesel from "./diesel_motion";
+import Coalgas from "./coalgas_motion";
+import Naturalgas from "./naturalgas_motion";
+import Battery from "./battery_motion";
+import Hydrogen from "./hydrogen_motion";
 import Popout from "./Popout";
 import BubbleChart from "./Bubblechart";
 import Passenger1 from "./Passenger1";
@@ -33,7 +32,7 @@ const ContentPage = () => {
 
   // Set background color
   document.body.style.backgroundColor = theme.bgColor;
-  document.body.style.padding = 0;    
+  document.body.style.padding = 0;
 
   const styles = {
     styleA: "styleA", // First page style
@@ -65,21 +64,83 @@ const ContentPage = () => {
   const getWrapperComponent = (category) => {
     switch (category) {
       case "electric":
-        return <Electric_car scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return (
+          <Electric_car
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
       case "charcoal":
-        return <Charcoal scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Charcoal scrollContainerRef={scrollContainerRef} />;
       case "gasoline":
-        return <Gasoline scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Gasoline scrollContainerRef={scrollContainerRef} />;
       case "diesel":
-        return <Diesel scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Diesel scrollContainerRef={scrollContainerRef} />;
       case "coalgas":
-        return <Coalgas scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Coalgas scrollContainerRef={scrollContainerRef} />;
       case "naturalgas":
-        return <Naturalgas scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Naturalgas scrollContainerRef={scrollContainerRef} />;
       case "battery":
-        return <Battery scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return <Battery scrollContainerRef={scrollContainerRef} />;
+
+      case "charcoal":
+        return (
+          <Charcoal
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+      case "gasoline":
+        return (
+          <Gasoline
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+      case "diesel":
+        return (
+          <Diesel
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+      case "coalgas":
+        return (
+          <Coalgas
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+      case "naturalgas":
+        return (
+          <Naturalgas
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+      case "battery":
+        return (
+          <Battery
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
+
       case "hydrogen":
-        return <Hydrogen scrollContainerRef={scrollContainerRef} setSelectedPopoutId={setSelectedPopoutId} setIsModalVisible={setIsModalVisible}/>;
+        return (
+          <Hydrogen
+            scrollContainerRef={scrollContainerRef}
+            setSelectedPopoutId={setSelectedPopoutId}
+            setIsModalVisible={setIsModalVisible}
+          />
+        );
       default:
         return;
     }
@@ -116,6 +177,58 @@ const ContentPage = () => {
       });
     }
   }, [category]);
+
+  // 防抖函数：避免多次快速调用
+  const debounce = (func, delay) => {
+    let timeout;
+    return (...args) => {
+      if (timeout) clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        func(...args);
+      }, delay);
+    };
+  };
+
+  useEffect(() => {
+    const handleScroll = debounce(() => {
+      const container = scrollContainerRef.current;
+      if (container) {
+        const isBottom =
+          container.scrollTop + container.clientHeight >=
+          container.scrollHeight - 5;
+        if (isBottom) {
+          if (category === "hydrogen") {
+            navigate("/ending"); // 跳转到结束页面
+          } else {
+            // 切换到下一个分类
+            const categories = [
+              "electric",
+              "charcoal",
+              "gasoline",
+              "diesel",
+              "coalgas",
+              "naturalgas",
+              "battery",
+              "hydrogen",
+            ];
+            const nextCategoryIndex =
+              (categories.indexOf(category) + 1) % categories.length;
+            setCategory(categories[nextCategoryIndex]);
+          }
+        }
+      }
+    }, 500); // 500ms 防抖时间
+
+    const container = scrollContainerRef.current;
+    if (container) {
+      container.addEventListener("scroll", handleScroll);
+    }
+    return () => {
+      if (container) {
+        container.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, [category, navigate, setCategory]);
 
   const handleButtonClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // Set selected Popout ID
