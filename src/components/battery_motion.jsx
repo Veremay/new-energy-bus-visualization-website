@@ -125,9 +125,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
     }
   }, [carPosition]);
 
-  const handleClick = (popoutId) => {
-    setSelectedPopoutId(popoutId); // 更新父组件状态
-    setIsModalVisible(true); // 显示模态框
+  
   const handleClick = (popoutId) => {
     setSelectedPopoutId(popoutId); // 更新父组件状态
     setIsModalVisible(true); // 显示模态框
@@ -198,7 +196,7 @@ const ScrollCar = ({ scrollContainerRef, setSelectedPopoutId, setIsModalVisible 
       <audio ref={audioRef} src={brakeSound} preload="auto" />
       <motion.div
         animate={{
-        opacity: isFadingOut && currentCarIndex === 1 ? 0 : 1,
+        opacity: isFadingOut && currentCarIndex === 1 && carPosition >= 600? 0 : 1,
         transition: {
           duration: 1, // 淡出动画持续时间
           ease: "easeOut",
