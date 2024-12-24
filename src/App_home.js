@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import ContentPage from "./components/ContentPage";
+import EndingPage from "./components/Ending";
 import { ThemeProvider } from "./ThemeContext";
 import { ThemeContext } from "./ThemeContext";
 const App = () => {
@@ -22,6 +23,7 @@ const MainApp = () => {
         <Route path="/" element={<Home />} />
         {/* Body 页 */}
         <Route path="/content" element={<ContentPage />} />
+        <Route path="/ending" element={<EndingPage />} />
       </Routes>
     </Router>
   );

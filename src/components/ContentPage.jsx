@@ -261,7 +261,7 @@ const ContentPage = () => {
 
             <p>返回</p>
           </button> */}
-          <p style={{ fontWeight: "bold" }}>从“铛铛车”到“宝宝巴士”</p>
+          <p style={{ fontWeight: "bold" }}>中国公交“源”来如此</p>
         </div>
 
         <div>

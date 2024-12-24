@@ -1,0 +1,36 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 7vh;
+  padding: 1.5rem 2.5rem 0rem 2.5rem;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-part {
+  color: #fff;
+  font-weight: 300;
+  font-size: medium;
+  max-width: 58%;
+  padding: 0.2rem 0rem;
+  line-height: 1.5;
+  p {
+    margin: 0.7rem 0;
+  }
+}
+
+.buses {
+  text-align: center;
+}
